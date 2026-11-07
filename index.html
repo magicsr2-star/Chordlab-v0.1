@@ -18,9 +18,7 @@
 <!-- App icons inline as SVG data URIs so no external files needed -->
 
 
-<!-- Google Fonts with offline fallback -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Sin Google Fonts: 100% offline, fuentes del sistema -->
 <style>
 /* Offline font fallbacks */
 @font-face{font-family:'Bebas Neue';src:local('Bebas Neue'),local('BebasNeue');font-display:swap;}
@@ -74,36 +72,6 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-
 .ob-cta-box{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.3);padding:14px 16px;margin-bottom:16px;text-align:center;width:100%;}
 
 
-/* ── CHORD SHEET (lacuerda style) ─────────────────────────── */
-#compSheet{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);white-space:pre;overflow-x:auto;}
-.cs-pair{display:block;margin-bottom:0;}
-.cs-chords{
-  font-family:'JetBrains Mono',monospace;
-  font-size:12px;
-  color:var(--gold);
-  font-weight:700;
-  letter-spacing:0;
-  line-height:1.5;
-  white-space:pre;
-  min-height:1.5em;
-}
-.cs-lyric{
-  font-family:'Outfit',sans-serif;
-  font-size:14px;
-  color:var(--text);
-  line-height:1.6;
-  white-space:pre;
-  margin-bottom:2px;
-}
-.cs-chord-token{
-  color:var(--gold);
-  font-weight:700;
-}
-
-@keyframes micPulse{
-  0%,100%{opacity:1;transform:scale(1);}
-  50%{opacity:.5;transform:scale(1.2);}
-}
 @keyframes splashOut{
   0%{opacity:1;pointer-events:all;}
   99%{opacity:0;pointer-events:none;}
@@ -159,7 +127,7 @@ body{padding-bottom:env(safe-area-inset-bottom,0px);}
 #favsBtn{position:relative;}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:4px;color:var(--white);}
 .nav-logo em{color:var(--gold);font-style:normal;}
-.nav-tabs-row{display:grid;grid-template-columns:repeat(7,1fr);width:100%;}
+.nav-tabs-row{display:grid;grid-template-columns:repeat(6,1fr);width:100%;}
 .nav-tab{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.5px;text-transform:uppercase;padding:9px 4px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;text-align:center;transition:color .2s,border-color .2s;background:none;border-left:none;border-right:none;border-top:none;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;}.tab-lbl{font-size:7px;letter-spacing:.3px;}
 .nav-tab svg{flex-shrink:0;opacity:.7;transition:opacity .2s;}
 .nav-tab.active svg,.nav-tab:hover svg{opacity:1;}
@@ -297,7 +265,8 @@ canvas#cof{width:100%;height:100%;cursor:pointer;}
 .cnt-role{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--teal);font-weight:700;min-width:30px;}
 .cnt-row.cnt-root .cnt-role{color:var(--orange);}
 .cnt-desc{font-family:'Outfit',sans-serif;font-size:11px;color:var(--muted);margin-left:auto;}
-.neck-card{background:var(--s2);border:1px solid var(--border);padding:10px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:130px;max-width:160px;flex:1;}
+.neck-card{background:var(--s2);border:1px solid var(--border);padding:10px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:220px;max-width:300px;flex:1;}
+.step-line{font-family:'JetBrains Mono',monospace;font-size:9px;color:#a7f3c9;line-height:1.7;text-align:center;margin-top:4px;}
 .neck-chord-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--orange);line-height:1;}
 .neck-chord-en{font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--muted);}
 .neck-pos{font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--muted);margin-top:3px;}
@@ -683,22 +652,21 @@ body.compact .plabel{margin-bottom:6px;}
     <div class="onboard-title">CHORD<em>LAB</em></div>
     <div class="ob-tagline">La app que todo guitarrista<br>de corrido necesitaba</div>
     <div class="ob-features-mini">
-      <span>Acordes</span><span>·</span><span>Escalas</span><span>·</span><span>IA</span><span>·</span><span>Practica</span>
+      <span>Acordes</span><span>·</span><span>Escalas</span><span>·</span><span>Practica</span>
     </div>
     <div class="onboard-dots">
       <div class="onboard-dot active"></div>
       <div class="onboard-dot"></div>
       <div class="onboard-dot"></div>
       <div class="onboard-dot"></div>
-      <div class="onboard-dot"></div>
-    </div>
+          </div>
     <button class="onboard-next" onclick="nextSlide()">QUIERO VERLA &rarr;</button>
     <button class="onboard-skip" onclick="finishOnboarding()">Ya se tocar, entrar directo</button>
   </div>
 
   <!-- Slide 1: Circle of Fifths -->
   <div class="onboard-slide" id="ob-slide-1">
-    <div class="ob-slide-number">01 / 04</div>
+    <div class="ob-slide-number">01 / 03</div>
     <div class="ob-feature-icon" style="background:rgba(245,200,66,.1);border:2px solid #f5c842;">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
         <circle cx="24" cy="24" r="20" stroke="#f5c842" stroke-width="2.5"/>
@@ -722,15 +690,14 @@ body.compact .plabel{margin-bottom:6px;}
       <div class="onboard-dot active"></div>
       <div class="onboard-dot"></div>
       <div class="onboard-dot"></div>
-      <div class="onboard-dot"></div>
-    </div>
+          </div>
     <button class="onboard-next" onclick="nextSlide()">SIGUIENTE &rarr;</button>
     <button class="onboard-skip" onclick="finishOnboarding()">Saltar</button>
   </div>
 
   <!-- Slide 2: Guitar chords -->
   <div class="onboard-slide" id="ob-slide-2">
-    <div class="ob-slide-number">02 / 04</div>
+    <div class="ob-slide-number">02 / 03</div>
     <div class="ob-feature-icon" style="background:rgba(249,115,22,.1);border:2px solid #f97316;">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
         <!-- Simple guitar fret diagram -->
@@ -750,9 +717,9 @@ body.compact .plabel{margin-bottom:6px;}
     <div class="onboard-title">Acordes de <em>Guitarra</em></div>
     <div class="ob-how">Lo que ves en cada diagrama:</div>
     <div class="ob-steps">
-      <div class="ob-step"><span class="ob-num" style="background:#f97316;">R</span>Punto naranja = nota raiz del acorde</div>
-      <div class="ob-step"><span class="ob-num" style="background:#34d399;">N</span>Punto verde = nota del acorde</div>
-      <div class="ob-step"><span class="ob-num" style="background:#4a4d6a;">T</span>Numero = traste donde pisas</div>
+      <div class="ob-step"><span class="ob-num" style="background:#22c55e;color:#000;">1</span>Punto verde = dedo que pisa (el numero es el dedo: 1 indice, 2 medio, 3 anular, 4 menique)</div>
+      <div class="ob-step"><span class="ob-num" style="background:#22c55e;color:#000;">C</span>Barra verde = cejilla con el dedo 1 en varias cuerdas</div>
+      <div class="ob-step"><span class="ob-num" style="background:#e04060;">X</span>X roja = no tocar &nbsp;·&nbsp; O = cuerda al aire &nbsp;·&nbsp; numero arriba = traste</div>
     </div>
     <div class="ob-tip">Toca cualquier diagrama para verlo en GRANDE con info de uso en corrido y norteno</div>
     <div class="onboard-dots">
@@ -760,15 +727,14 @@ body.compact .plabel{margin-bottom:6px;}
       <div class="onboard-dot"></div>
       <div class="onboard-dot active"></div>
       <div class="onboard-dot"></div>
-      <div class="onboard-dot"></div>
-    </div>
+          </div>
     <button class="onboard-next" onclick="nextSlide()">SIGUIENTE &rarr;</button>
     <button class="onboard-skip" onclick="finishOnboarding()">Saltar</button>
   </div>
 
   <!-- Slide 3: Genres + Practice -->
   <div class="onboard-slide" id="ob-slide-3">
-    <div class="ob-slide-number">03 / 04</div>
+    <div class="ob-slide-number">03 / 03</div>
     <div class="ob-feature-icon" style="background:rgba(45,212,191,.1);border:2px solid #2dd4bf;">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
         <path d="M8 36a4 4 0 1 0 8 0V16l24-4v20" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"/>
@@ -788,44 +754,11 @@ body.compact .plabel{margin-bottom:6px;}
       <div class="onboard-dot"></div>
       <div class="onboard-dot"></div>
       <div class="onboard-dot active"></div>
-      <div class="onboard-dot"></div>
-    </div>
+          </div>
     <button class="onboard-next" onclick="nextSlide()">SIGUIENTE &rarr;</button>
     <button class="onboard-skip" onclick="finishOnboarding()">Saltar</button>
   </div>
 
-  <!-- Slide 4: AI + CTA -->
-  <div class="onboard-slide" id="ob-slide-4">
-    <div class="ob-slide-number">04 / 04</div>
-    <div class="ob-feature-icon" style="background:rgba(167,139,250,.1);border:2px solid #a78bfa;">
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="14" width="32" height="22" rx="4" stroke="#a78bfa" stroke-width="2"/>
-        <line x1="14" y1="22" x2="34" y2="22" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <line x1="14" y1="28" x2="28" y2="28" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <circle cx="38" cy="12" r="7" fill="#a78bfa"/>
-        <text x="38" y="16" font-family="sans-serif" font-size="8" fill="#000" text-anchor="middle" font-weight="bold">IA</text>
-      </svg>
-    </div>
-    <div class="onboard-title">IA para <em>Componer</em></div>
-    <div class="ob-how">Compone mas rapido que nunca:</div>
-    <div class="ob-steps">
-      <div class="ob-step"><span class="ob-num" style="background:#a78bfa;">1</span>Escribe o <strong>canta</strong> la letra de tu cancion</div>
-      <div class="ob-step"><span class="ob-num" style="background:#a78bfa;">2</span>Elige el tono (A, D, G...) y el genero</div>
-      <div class="ob-step"><span class="ob-num" style="background:#a78bfa;">3</span>La IA detecta donde van los acordes automaticamente</div>
-    </div>
-    <div class="ob-cta-box">
-      <div style="font-family:JetBrains Mono,monospace;font-size:9px;color:#a78bfa;letter-spacing:2px;margin-bottom:6px;">YA PUEDES USAR</div>
-      <div style="font-family:Bebas Neue,sans-serif;font-size:22px;color:#fff;letter-spacing:2px;">Circulo · Guitarra · Generos<br>Practica · Glosario · IA</div>
-    </div>
-    <div class="onboard-dots">
-      <div class="onboard-dot"></div>
-      <div class="onboard-dot"></div>
-      <div class="onboard-dot"></div>
-      <div class="onboard-dot"></div>
-      <div class="onboard-dot active"></div>
-    </div>
-    <button class="onboard-next" onclick="finishOnboarding()" style="background:linear-gradient(135deg,#f5c842,#f97316);border:none;color:#000;font-family:Bebas Neue,sans-serif;font-size:20px;letter-spacing:4px;padding:16px 40px;cursor:pointer;width:100%;max-width:280px;">EMPEZAR AHORA</button>
-  </div>
 
 </div>
 
@@ -901,7 +834,6 @@ body.compact .plabel{margin-bottom:6px;}
     <button class="nav-tab" onclick="showPage('practice',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><span class="tab-lbl">Práctica</span></button>
     <button class="nav-tab" onclick="showPage('notes',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><span class="tab-lbl">Notas</span></button>
     <button class="nav-tab" onclick="showPage('glossary',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span class="tab-lbl">Glosario</span></button>
-    <button class="nav-tab" onclick="showPage('compose',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5"/><path d="M17.5 2.5a2.121 2.121 0 0 1 3 3L12 14l-4 1 1-4 7.5-7.5z"/></svg><span class="tab-lbl">Composicion</span></button>
   </div>
 </nav>
 
@@ -991,106 +923,6 @@ body.compact .plabel{margin-bottom:6px;}
 
 
 <!-- COMPOSICION PAGE -->
-<div class="page" id="page-compose">
-  <div class="sec-title">IA <em>Composicion</em></div>
-  <div class="sec-sub">// Pega la letra, elige el tono y Claude detecta los acordes</div>
-
-  <!-- Step 1: Key + Genre -->
-  <div class="pcard" style="margin-bottom:12px;">
-    <div class="plabel">// 1. Tonalidad y genero</div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-start;">
-      <div style="flex:1;min-width:140px;">
-        <div style="font-family:JetBrains Mono,monospace;font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:6px;">TONO</div>
-        <div id="compKeyGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;"></div>
-      </div>
-      <div style="flex:1;min-width:140px;">
-        <div style="font-family:JetBrains Mono,monospace;font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:6px;">MODO</div>
-        <div style="display:flex;gap:4px;">
-          <button id="compMajBtn" onclick="setCompMode('major')" style="flex:1;padding:8px;background:var(--gold);border:1px solid var(--gold);color:#000;font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:1px;cursor:pointer;">MAYOR</button>
-          <button id="compMinBtn" onclick="setCompMode('minor')" style="flex:1;padding:8px;background:var(--s2);border:1px solid var(--border);color:var(--muted);font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:1px;cursor:pointer;">MENOR</button>
-        </div>
-        <div style="margin-top:8px;">
-          <div style="font-family:JetBrains Mono,monospace;font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:6px;">GENERO</div>
-          <select id="compGenre" style="width:100%;background:var(--s2);border:1px solid var(--border);color:var(--text);font-family:Outfit,sans-serif;font-size:12px;padding:7px 8px;outline:none;cursor:pointer;">
-            <option value="any">Cualquier genero</option>
-            <option value="corrido">Corrido / Norteno</option>
-            <option value="sierreno">Sierreno</option>
-            <option value="banda">Banda Sinaloense</option>
-            <option value="cumbia">Cumbia</option>
-            <option value="bachata">Bachata</option>
-            <option value="pop">Pop / Balada</option>
-            <option value="blues">Blues / Rock</option>
-            <option value="jazz">Jazz / Bolero</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Step 2: Lyrics input -->
-  <div class="pcard" style="margin-bottom:12px;">
-    <div class="plabel">// 2. Pega o escribe la letra</div>
-    <textarea id="compLyrics" placeholder="Escribe la letra aqui...
-
-Ejemplo:
-Me canse de estar esperando
-Ya no voy a seguir llorando
-Porque tu no me quieres ver
-Y yo no te puedo perder" style="width:100%;min-height:160px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:Outfit,sans-serif;font-size:13px;padding:12px;outline:none;resize:vertical;line-height:1.8;border-radius:0;"></textarea>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;flex-wrap:wrap;gap:8px;">
-      <span id="compKeyLabel" style="font-family:JetBrains Mono,monospace;font-size:10px;color:var(--gold);letter-spacing:1px;">Tono: A mayor</span>
-      <div style="display:flex;gap:6px;align-items:center;">
-        <!-- Mic button -->
-        <button onclick="toggleVoice()" id="compMicBtn" title="Cantar / dictar letra"
-          style="background:var(--s2);border:1px solid var(--border);color:var(--muted);padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:1px;transition:all .2s;">
-          <svg id="compMicIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-            <line x1="12" y1="19" x2="12" y2="23"/>
-            <line x1="8" y1="23" x2="16" y2="23"/>
-          </svg>
-          <span id="compMicLabel">VOZ</span>
-        </button>
-        <!-- Analyze button -->
-        <button onclick="analyzeWithAI()" id="compAnalyzeBtn"
-          style="background:var(--gold);border:none;color:#000;font-family:Bebas Neue,sans-serif;font-size:16px;letter-spacing:3px;padding:10px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          ANALIZAR
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Result -->
-  <div id="compResult" style="display:none;">
-    <div class="pcard" style="margin-bottom:12px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-        <div class="plabel" style="margin:0;">// Cifrado generado</div>
-        <div style="display:flex;gap:6px;">
-          <button onclick="copyChordSheet()" style="background:var(--s2);border:1px solid var(--border);color:var(--muted);font-family:JetBrains Mono,monospace;font-size:8px;letter-spacing:1px;padding:5px 10px;cursor:pointer;text-transform:uppercase;">Copiar</button>
-          <button onclick="saveToNotes()" style="background:var(--teal);border:none;color:#000;font-family:JetBrains Mono,monospace;font-size:8px;letter-spacing:1px;padding:5px 10px;cursor:pointer;text-transform:uppercase;">Guardar en notas</button>
-        </div>
-      </div>
-      <div id="compSheet" style="font-family:JetBrains Mono,monospace;font-size:13px;line-height:2.4;color:var(--text);white-space:pre-wrap;"></div>
-    </div>
-    <div id="compChordBar" class="pcard">
-      <div class="plabel">// Acordes usados en esta cancion</div>
-      <div id="compChordPills" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;"></div>
-    </div>
-  </div>
-
-  <!-- Loading state -->
-  <div id="compLoading" style="display:none;text-align:center;padding:40px;">
-    <div style="font-family:Bebas Neue,sans-serif;font-size:28px;letter-spacing:4px;color:var(--gold);">ANALIZANDO...</div>
-    <div style="font-family:JetBrains Mono,monospace;font-size:10px;color:var(--muted);margin-top:8px;letter-spacing:2px;">Claude esta detectando los acordes</div>
-    <div id="compDots" style="margin-top:16px;font-size:24px;color:var(--gold);">...</div>
-  </div>
-
-  <!-- Error state -->
-  <div id="compError" style="display:none;" class="pcard">
-    <div style="font-family:Outfit,sans-serif;font-size:13px;color:var(--rose);"></div>
-  </div>
-</div>
 
 <script>
 // Global error handler to catch and show errors
@@ -1156,7 +988,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoritos', noFavs:'Aun no tienes favoritos',
       saveFav:'Toca [+] en cualquier progresion para guardarla',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.0 . Para musicos'
+      version:'CHORD LAB v2.1 Optimizado . Para musicos'
     }
   },
   'en': {
@@ -1177,7 +1009,7 @@ var LANGS = {
       savedfavs:'[FAV] Favorites', noFavs:'No favorites yet',
       saveFav:'Tap [+] on any progression to save it',
       metronome:'Metronome', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.0 . For musicians'
+      version:'CHORD LAB v2.1 Optimizado . For musicians'
     }
   },
   'pt': {
@@ -1198,7 +1030,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoritos', noFavs:'Sem favoritos ainda',
       saveFav:'Toque [+] em qualquer progressao para salvar',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.0 . Para musicos'
+      version:'CHORD LAB v2.1 Optimizado . Para musicos'
     }
   },
   'fr': {
@@ -1219,7 +1051,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoris', noFavs:'Aucun favori',
       saveFav:'Appuyez sur [+] pour sauvegarder',
       metronome:'Metronome', bpm:'BPM', play:'> JOUER', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.0 . Pour musiciens'
+      version:'CHORD LAB v2.1 Optimizado . Pour musiciens'
     }
   },
   'de': {
@@ -1240,7 +1072,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoriten', noFavs:'Keine Favoriten',
       saveFav:'Tippe [+] auf eine Progression',
       metronome:'Metronom', bpm:'BPM', play:'> ABSPIELEN', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.0 . Fur Musiker'
+      version:'CHORD LAB v2.1 Optimizado . Fur Musiker'
     }
   },
   'it': {
@@ -1261,7 +1093,7 @@ var LANGS = {
       savedfavs:'[FAV] Preferiti', noFavs:'Nessun preferito',
       saveFav:'Tocca [+] su qualsiasi progressione',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.0 . Per musicisti'
+      version:'CHORD LAB v2.1 Optimizado . Per musicisti'
     }
   },
 };
@@ -1570,12 +1402,12 @@ var CHORD_SHAPES = {
          {f:[10,12,12,11,10,10],fg:[1,3,4,2,1,1],b:{fret:10,fromStr:0,toStr:5},lbl:'Cejilla 10',pos:'Traste 10-12',genre:'Posicion alta -- solo o riff'}],
   'E':  [{f:[0,2,2,1,0,0],fg:[0,2,3,1,0,0],b:null,lbl:'Abierta',pos:'Traste 0-2',genre:'Corrido, Norteno, Blues -- la forma E es la base'},
          {f:[7,7,9,9,9,7],fg:[1,1,3,3,3,1],b:{fret:7,fromStr:0,toStr:5},lbl:'Cejilla 7',pos:'Traste 7-9',genre:'Sierreno, Corrido en Si'},
-         {f:[12,12,14,14,14,12],fg:[1,1,3,3,3,1],b:{fret:12},lbl:'Cejilla 12',pos:'Traste 12',genre:'Registro alto -- melodico'}],
+         {f:[12,12,14,14,14,12],fg:[1,1,3,3,3,1],b:{fret:12,fromStr:0,toStr:5},lbl:'Cejilla 12',pos:'Traste 12',genre:'Registro alto -- melodico'}],
   'G':  [{f:[3,2,0,0,0,3],fg:[2,1,0,0,0,3],b:null,lbl:'Abierta',pos:'Traste 0-3',genre:'Norteno, Corrido, Ranchero'},
          {f:[3,5,5,4,3,3],fg:[1,3,4,2,1,1],b:{fret:3,fromStr:0,toStr:5},lbl:'Cejilla 3',pos:'Traste 3-5',genre:'Cumbia, Sierreno'}],
   'A':  [{f:[-1,0,2,2,2,0],fg:[0,0,2,3,4,0],b:null,lbl:'Abierta',pos:'Traste 0-2',genre:'Norteno, Corrido -- base del 80% de corridos en La'},
          {f:[5,7,7,6,5,5],fg:[1,3,4,2,1,1],b:{fret:5,fromStr:0,toStr:5},lbl:'Cejilla 5',pos:'Traste 5-7',genre:'Sierreno, Cumbia moderna'},
-         {f:[0,0,2,2,2,0],fg:[0,0,1,2,3,0],b:null,lbl:'Sin bajo',pos:'Cuerdas 2-6',genre:'Strumming -- norteno rapido'}],
+         {f:[0,0,2,2,2,0],fg:[0,0,1,2,3,0],b:null,lbl:'6a al aire',pos:'Traste 0-2',genre:'Strumming -- norteno rapido'}],
   'B':  [{f:[-1,2,4,4,4,2],fg:[0,1,3,3,3,1],b:{fret:2,fromStr:0,toStr:5},lbl:'Cejilla 2',pos:'Traste 2-4',genre:'Corrido, Norteno -- V de Mi'},
          {f:[7,9,9,8,7,7],fg:[1,3,4,2,1,1],b:{fret:7,fromStr:0,toStr:5},lbl:'Cejilla 7',pos:'Traste 7-9',genre:'Sierreno, Ranchero'},
          {f:[-1,2,4,4,4,-1],fg:[0,1,3,4,4,0],b:null,lbl:'Sin cuerdas agudas',pos:'Traste 2-4',genre:'Bajo sexto -- sonido grueso'}],
@@ -1618,7 +1450,7 @@ var CHORD_SHAPES = {
   'Eb': [{f:[-1,-1,1,3,4,3],fg:[0,0,1,2,4,3],b:null,lbl:'Posicion',pos:'Traste 1-4'},
          {f:[3,6,5,3,4,3],fg:[1,4,3,1,2,1],b:{fret:3,fromStr:0,toStr:5},lbl:'Cejilla 3',pos:'Traste 3-6'}],
   'Ab': [{f:[4,6,6,5,4,4],fg:[1,3,4,2,1,1],b:{fret:4,fromStr:0,toStr:5},lbl:'Cejilla 4',pos:'Traste 4-6'},
-         {f:[-1,-1,6,5,4,4],fg:[0,0,4,3,1,1],b:{fret:4},lbl:'Abierta 4',pos:'Traste 4-6'}],
+         {f:[-1,-1,6,5,4,4],fg:[0,0,4,3,1,1],b:{fret:4,fromStr:2,toStr:5},lbl:'Cejilla 4',pos:'Traste 4-6'}],
 
   // MORE MINOR shapes
   'Fm': [{f:[1,3,3,1,1,1],fg:[1,3,4,1,1,1],b:{fret:1,fromStr:0,toStr:5},lbl:'Cejilla 1',pos:'Traste 1-3'},
@@ -1835,7 +1667,7 @@ function gRenderDiagram(){
   });
   c1.appendChild(ccRow);
   // chord notes breakdown table
-  var ctbl=document.createElement('div');ctbl.className='plabel';ctbl.style.marginTop='14px';ctbl.textContent='// Composicion del acorde';c1.appendChild(ctbl);
+  var ctbl=document.createElement('div');ctbl.className='plabel';ctbl.style.marginTop='14px';ctbl.textContent='// Intervalos del acorde';c1.appendChild(ctbl);
   var ntable=document.createElement('div');ntable.className='chord-notes-table';
   ct.iv.forEach(function(iv,i){
     var noteIdx=(gRoot+iv)%12;
@@ -1983,19 +1815,44 @@ function getVoicings(root,ct){
     });
   }
 
-  // Fallback: compute algorithmically
+  // Fallback practico: solo posturas reales tocables.
+  // (a) posicion abierta 0-4, (b) cejillas forma E y forma A para
+  // Mayor/Menor/7/maj7/m7. Otros tipos: calculo filtrado por extension.
   var ci=new Set(ct.iv.map(function(iv){ return (root+iv)%12; }));
   var op=[4,9,2,7,11,4];
   var voicings=[];
   function bestFret(sp,min,max){ for(var f=min;f<=max;f++){ if(ci.has((sp+f)%12)) return f; } return -1; }
+  function spanOK(fr){ var p=fr.filter(function(f){return f>0;}); if(p.length===0) return true; return (Math.max.apply(null,p)-Math.min.apply(null,p))<=4; }
+  function sounding(fr){ return fr.filter(function(f){return f>=0;}).length; }
+  function hasRoot(fr){ for(var i=0;i<6;i++){ if(fr[i]>=0 && (op[i]+fr[i])%12===root%12) return true; } return false; }
   var of=op.map(function(sp){ return bestFret(sp,0,4); });
-  if(of.filter(function(f){return f>=0;}).length>=Math.min(3,ct.iv.length))
+  if(sounding(of)>=3 && spanOK(of) && hasRoot(of))
     voicings.push({label:'Posicion abierta',frets:of,fingers:autoFingers(of,null),barre:null,position:'Trastes 0-4'});
-  [2,5,7].forEach(function(bf){
-    var ff=op.map(function(sp){ return bestFret(sp,bf,bf+4); });
-    if(ff.filter(function(f){return f>=0;}).length>=Math.min(3,ct.iv.length))
-      voicings.push({label:'Cejilla '+bf,frets:ff,fingers:autoFingers(ff,bf),barre:{fret:bf},position:'Traste '+bf+'-'+(bf+4)});
-  });
+  // Cejillas forma E (tonica en 6a) y forma A (tonica en 5a)
+  var BARRE_PATTERNS={
+    '':   {E:{f:[0,2,2,1,0,0],fg:[1,3,4,2,1,1]}, A:{f:[-1,0,2,2,2,0],fg:[0,1,2,3,4,1]}},
+    'm':  {E:{f:[0,2,2,0,0,0],fg:[1,3,4,1,1,1]}, A:{f:[-1,0,2,2,1,0],fg:[0,1,2,3,1,1]}},
+    '7':  {E:{f:[0,2,0,1,0,0],fg:[1,2,1,3,1,1]}, A:{f:[-1,0,2,0,2,0],fg:[0,1,2,1,3,1]}},
+    'maj7':{E:{f:[0,2,1,1,0,0],fg:[1,4,2,3,1,1]}, A:{f:[-1,0,2,1,2,0],fg:[0,1,2,1,3,1]}},
+    'm7': {E:{f:[0,2,0,0,0,0],fg:[1,3,1,1,1,1]}, A:{f:[-1,0,2,0,1,0],fg:[0,1,2,1,1,1]}}
+  };
+  var bp=BARRE_PATTERNS[ct.sym];
+  if(bp){
+    var bfE=(root-4+12)%12; if(bfE===0) bfE=12;
+    var bfA=(root-9+12)%12; if(bfA===0) bfA=12;
+    if(bfE>=1 && bfE<=12){
+      voicings.push({label:'Cejilla '+bfE+' (forma E)',frets:bp.E.f.map(function(r){return r===0?bfE:(r===-1?-1:bfE+r);}),fingers:bp.E.fg,barre:{fret:bfE,fromStr:0,toStr:5},position:'Traste '+bfE+'-'+(bfE+2)});
+    }
+    if(bfA>=1 && bfA<=12){
+      voicings.push({label:'Cejilla '+bfA+' (forma A)',frets:bp.A.f.map(function(r){return r===0?bfA:(r===-1?-1:bfA+r);}),fingers:bp.A.fg,barre:{fret:bfA,fromStr:1,toStr:5},position:'Traste '+bfA+'-'+(bfA+2)});
+    }
+  } else {
+    [2,5,7,9].forEach(function(bf){
+      var ff=op.map(function(sp){ return bestFret(sp,bf,bf+4); });
+      if(sounding(ff)>=3 && spanOK(ff) && hasRoot(ff))
+        voicings.push({label:'Cejilla '+bf,frets:ff,fingers:autoFingers(ff,bf),barre:{fret:bf},position:'Traste '+bf+'-'+(bf+4)});
+    });
+  }
   if(voicings.length===0){
     var fb=op.map(function(sp){ return bestFret(sp,0,12); });
     voicings.push({label:'Voicing',frets:fb,fingers:autoFingers(fb,null),barre:null,position:'Variable'});
@@ -2119,139 +1976,161 @@ function detectBarre(frets){
 
 /*  drawDiagram(frets, root, chordNotes, W, H, pL, pT, pB)
     Core SVG renderer used by both small cards and the large modal.     */
-function drawDiagram(frets, root, chordNotes, explicitBarre, W, H, pL, pT, pB){
+/*  drawDiagram(frets, fingers, root, chordNotes, explicitBarre, W, H, pL, pT, pB)
+    Mastil en HORIZONTAL, como se ve el brazo al tocar:
+    cejilla a la izquierda, trastes creciendo a la derecha,
+    cuerda grave E (6a) arriba y aguda e (1a) abajo.
+    frets: [E A D G B e] -1=muda, 0=al aire. fingers: dedo 1-4 por cuerda. */
+function drawDiagram(frets, fingers, root, chordNotes, explicitBarre, W, H, pL, pT, pB){
   var STR = 6, VF = 5;
-  var sw  = (W - pL - Math.round(W*0.08)) / (STR-1);
-  var fh  = (H - pT - pB) / VF;
-  var dotR = Math.round(Math.min(sw, fh) * 0.38);
+  var pR  = Math.round(W*0.04);
+  var fw  = (W - pL - pR) / VF;
+  var sh  = (H - pT - pB) / (STR-1);
+  var dotR = Math.min(fw, sh) * 0.36;
+  fingers = fingers || frets.map(function(){ return 0; });
 
-  // Start fret
+  // Primer traste visible (sf = traste anterior al mas bajo pisado)
   var pressed = frets.filter(function(f){ return f>0; });
   var minF    = pressed.length>0 ? Math.min.apply(null,pressed) : 0;
   var sf      = minF <= 1 ? 0 : minF - 1;
+  // X de cada columna de traste: centro del espacio entre dos trastes
+  function fretX(f){ return pL + (f - sf - 0.5)*fw; }
+  var x0 = pL - fw*0.5; // columna de cuerdas al aire / mudas
 
   var svg = '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg"'
     + ' style="width:100%;height:auto;display:block;">';
   svg += '<rect width="'+W+'" height="'+H+'" fill="#0d0e18" rx="4"/>';
 
-  // -- Nut / fret position indicator ------------------------------
+  // -- Numeros de traste, uno por columna -------------------------
+  for(var c=0; c<VF; c++){
+    svg += '<text x="'+(pL + c*fw + fw/2)+'" y="'+(pT - 8)+'"'
+      + ' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.85)+'"'
+      + ' fill="#888" text-anchor="middle">'+(sf + c + 1)+'</text>';
+  }
+
+  // -- Cejilla (nut) o linea del primer traste ---------------------
   if(sf === 0){
-    svg += '<rect x="'+pL+'" y="'+(pT-Math.round(fh*0.12))+'"'
-      +' width="'+((STR-1)*sw)+'" height="'+Math.round(fh*0.1)+'" rx="2" fill="#c8c8a8"/>';
+    svg += '<rect x="'+(pL-2)+'" y="'+pT+'" width="4" height="'+(sh*(STR-1))+'" rx="2" fill="#c8c8a8"/>';
   } else {
-    svg += '<text x="'+(pL - Math.round(W*0.04))+'" y="'+(pT + fh*0.5 + Math.round(W*0.015))+'"'
-      +' font-family="JetBrains Mono,monospace" font-size="'+Math.round(W*0.07)+'" fill="#666"'
-      +' text-anchor="end">'+sf+'fr</text>';
+    svg += '<line x1="'+pL+'" y1="'+pT+'" x2="'+pL+'" y2="'+(pT+sh*(STR-1))+'" stroke="#c8c8a8" stroke-width="2"/>';
   }
 
-  // -- Fret lines --------------------------------------------------
+  // -- Lineas de traste (verticales) -------------------------------
   for(var f=1; f<=VF; f++){
-    svg += '<line x1="'+pL+'" y1="'+(pT+f*fh)+'" x2="'+(pL+(STR-1)*sw)+'" y2="'+(pT+f*fh)+'"'
-      +' stroke="#252838" stroke-width="1"/>';
+    svg += '<line x1="'+(pL+f*fw)+'" y1="'+pT+'" x2="'+(pL+f*fw)+'" y2="'+(pT+sh*(STR-1))+'"'
+      + ' stroke="#252838" stroke-width="1"/>';
   }
 
-  // -- String lines ------------------------------------------------
-  var strW = [1.9,1.6,1.3,1.1,0.9,0.8];
+  // -- Cuerdas (horizontales, grave arriba) ------------------------
+  var strW = [2.0,1.7,1.4,1.2,1.0,0.8];
   for(var s=0; s<STR; s++){
-    svg += '<line x1="'+(pL+s*sw)+'" y1="'+pT+'" x2="'+(pL+s*sw)+'" y2="'+(pT+VF*fh)+'"'
-      +' stroke="#2e3248" stroke-width="'+strW[s]+'"/>';
+    var sy = pT + s*sh;
+    svg += '<line x1="'+pL+'" y1="'+sy+'" x2="'+(pL+VF*fw)+'" y2="'+sy+'"'
+      + ' stroke="#2e3248" stroke-width="'+strW[s]+'"/>';
+    svg += '<text x="'+(pL - fw - 2)+'" y="'+(sy+3)+'"'
+      + ' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.8)+'"'
+      + ' fill="#888" text-anchor="end">'+STR_NAMES[s]+'</text>';
   }
 
-  // -- Barre: use explicit if provided, else auto-detect ---------
+  // -- Cejilla: explicita si viene, si no auto-detectada ------------
   var barre = null;
   if(explicitBarre && explicitBarre.fret > 0){
-    // Explicit from CHORD_SHAPES -- covers fromStr=0 to toStr=5 (full)
     var eb = explicitBarre;
-    barre = {fret: eb.fret, fromStr: eb.fromStr||0, toStr: eb.toStr!==undefined?eb.toStr:5};
+    // Si no trae fromStr/toStr, se deducen de las cuerdas pisadas en ese traste
+    var bFrom = (eb.fromStr!==undefined) ? eb.fromStr : null;
+    var bTo   = (eb.toStr!==undefined) ? eb.toStr : null;
+    if(bFrom===null || bTo===null){
+      var hit=[];
+      for(var bi=0; bi<6; bi++){ if(frets[bi]===eb.fret) hit.push(bi); }
+      if(hit.length>0){ bFrom=hit[0]; bTo=hit[hit.length-1]; }
+      else { bFrom=0; bTo=5; }
+    }
+    barre = {fret: eb.fret, fromStr: bFrom, toStr: bTo};
   } else {
     barre = detectBarre(frets);
   }
   var barreStringSet = {};
   if(barre){
-    var bRow = barre.fret - sf;
-    if(bRow >= 1 && bRow <= VF){
-      var by  = pT + (bRow - 0.5)*fh;
-      var bx1 = pL + barre.fromStr * sw;
-      var bx2 = pL + barre.toStr   * sw;
-      svg += '<rect x="'+bx1+'" y="'+(by-dotR)+'" width="'+(bx2-bx1)+'" height="'+(dotR*2)+'"'
-        +' rx="'+dotR+'" fill="#e06010" opacity="0.9"/>';
-      // Fret number on barre
-      svg += '<text x="'+((bx1+bx2)/2)+'" y="'+(by+Math.round(dotR*0.45))+'"'
-        +' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.8)+'"'
-        +' font-weight="bold" fill="#fff" text-anchor="middle">'+barre.fret+'</text>';
-      // Mark which strings are covered by barre
-      for(var bi=barre.fromStr; bi<=barre.toStr; bi++) barreStringSet[bi] = true;
+    var brow = barre.fret - sf;
+    if(brow >= 1 && brow <= VF){
+      var bx  = fretX(barre.fret);
+      var by1 = pT + barre.fromStr*sh;
+      var by2 = pT + barre.toStr*sh;
+      svg += '<rect x="'+(bx-dotR*0.9)+'" y="'+(by1-dotR)+'" width="'+(dotR*1.8)+'" height="'+((by2-by1)+dotR*2)+'"'
+        + ' rx="'+dotR+'" fill="#22c55e" opacity="0.95"/>';
+      svg += '<text x="'+bx+'" y="'+(((by1+by2)/2)+Math.round(dotR*0.4))+'"'
+        + ' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.8)+'"'
+        + ' font-weight="bold" fill="#fff" text-anchor="middle">'+barre.fret+'</text>';
+      for(var bi2=barre.fromStr; bi2<=barre.toStr; bi2++) barreStringSet[bi2] = true;
     }
   }
 
-  // -- Per-string markers ------------------------------------------
+  // -- Puntos por cuerda: verde con numero de dedo ------------------
   for(var si=0; si<STR; si++){
     var fi  = frets[si];
-    var sx  = pL + si*sw;
-
+    var cy  = pT + si*sh;
+    var pit = fi>0 ? (OPEN_PITCH[si] + fi) % 12 : (OPEN_PITCH[si] % 12);
+    var isR = (pit === root%12);
     if(fi === -1){
-      // Muted
-      var xSize = Math.round(dotR*0.7);
-      svg += '<line x1="'+(sx-xSize)+'" y1="'+(pT-dotR*1.8 - xSize)+'"'
-        +' x2="'+(sx+xSize)+'" y2="'+(pT-dotR*1.8 + xSize)+'" stroke="#e04060" stroke-width="2" stroke-linecap="round"/>';
-      svg += '<line x1="'+(sx+xSize)+'" y1="'+(pT-dotR*1.8 - xSize)+'"'
-        +' x2="'+(sx-xSize)+'" y2="'+(pT-dotR*1.8 + xSize)+'" stroke="#e04060" stroke-width="2" stroke-linecap="round"/>';
-
+      // Muda: X roja
+      var xs = Math.round(dotR*0.6);
+      svg += '<line x1="'+(x0-xs)+'" y1="'+(cy-xs)+'" x2="'+(x0+xs)+'" y2="'+(cy+xs)+'" stroke="#e04060" stroke-width="2.5" stroke-linecap="round"/>';
+      svg += '<line x1="'+(x0+xs)+'" y1="'+(cy-xs)+'" x2="'+(x0-xs)+'" y2="'+(cy+xs)+'" stroke="#e04060" stroke-width="2.5" stroke-linecap="round"/>';
     } else if(fi === 0){
-      // Open string
-      var pitch = OPEN_PITCH[si] % 12;
-      var isR   = (pitch === root%12);
-      var inC   = chordNotes.has(pitch);
-      var cy    = pT - dotR*1.8;
-      if(isR || inC){
-        svg += '<circle cx="'+sx+'" cy="'+cy+'" r="'+dotR+'"'
-          +' fill="'+(isR?'#f97316':'#34d399')+'"/>';
-        svg += '<text x="'+sx+'" y="'+(cy + Math.round(dotR*0.38))+'"'
-          +' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.75)+'"'
-          +' font-weight="bold" fill="#000" text-anchor="middle">'+noteName(pitch)+'</text>';
-      } else {
-        svg += '<circle cx="'+sx+'" cy="'+cy+'" r="'+Math.round(dotR*0.85)+'"'
-          +' fill="none" stroke="#555" stroke-width="1.5"/>';
-      }
-
+      // Al aire: O verde
+      svg += '<circle cx="'+x0+'" cy="'+cy+'" r="'+Math.round(dotR*0.85)+'"'
+        + ' fill="none" stroke="#22c55e" stroke-width="2"/>';
+      svg += '<text x="'+x0+'" y="'+(cy+Math.round(dotR*0.3))+'"'
+        + ' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.7)+'"'
+        + ' font-weight="bold" fill="#22c55e" text-anchor="middle">O</text>';
     } else {
-      // Fretted note -- skip if covered by barre bar
+      // Pisada: punto verde con el numero de dedo dentro
       var row = fi - sf;
       if(row >= 1 && row <= VF && !barreStringSet[si]){
-        var dy  = pT + (row - 0.5)*fh;
-        var pit = (OPEN_PITCH[si] + fi) % 12;
-        var isR2= (pit === root%12);
-        var ic  = chordNotes.has(pit);
-        if(isR2 || ic){
-          svg += '<circle cx="'+sx+'" cy="'+dy+'" r="'+dotR+'"'
-            +' fill="'+(isR2?'#f97316':'#34d399')+'"/>';
-          svg += '<text x="'+sx+'" y="'+(dy + Math.round(dotR*0.38))+'"'
-            +' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.75)+'"'
-            +' font-weight="bold" fill="#000" text-anchor="middle">'+noteName(pit)+'</text>';
-        }
+        var dx  = fretX(fi);
+        var fgr = (fingers[si] && fingers[si]>0) ? fingers[si] : null;
+        svg += '<circle cx="'+dx+'" cy="'+cy+'" r="'+dotR+'" fill="#22c55e"'
+          + (isR ? ' stroke="#f5c842" stroke-width="2"' : '') + '/>';
+        svg += '<text x="'+dx+'" y="'+(cy + Math.round(dotR*0.38))+'"'
+          + ' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.75)+'"'
+          + ' font-weight="bold" fill="#000" text-anchor="middle">'
+          + (fgr ? fgr : noteName(pit)) + '</text>';
       }
     }
-  }
-
-  // -- String name labels at bottom --------------------------------
-  for(var sn=0; sn<STR; sn++){
-    svg += '<text x="'+(pL+sn*sw)+'" y="'+(H - Math.round(H*0.02))+'"'
-      +' font-family="JetBrains Mono,monospace" font-size="'+Math.round(W*0.055)+'"'
-      +' fill="#444" text-anchor="middle">'+STR_NAMES[sn]+'</text>';
   }
 
   svg += '</svg>';
   return svg;
 }
 
-// Small card diagram (used in the chord list)
+// Linea paso a paso debajo del diagrama, ej:
+// "Traste 1: 6a no tocar - 5a dedo 3 - 4a dedo 2 - 3a al aire - 2a dedo 1 - 1a al aire"
+function stepLine(frets, fingers){
+  var pressed = frets.filter(function(f){ return f>0; });
+  var base = pressed.length>0 ? Math.min.apply(null,pressed) : 0;
+  var names = ['6a','5a','4a','3a','2a','1a'];
+  var parts = [];
+  for(var i=0;i<6;i++){
+    var f = frets[i];
+    if(f===-1) parts.push(names[i]+' no tocar');
+    else if(f===0) parts.push(names[i]+' al aire');
+    else {
+      var fg = (fingers && fingers[i]>0) ? fingers[i] : 0;
+      parts.push(names[i]+' dedo '+(fg||'?')+' (traste '+f+')');
+    }
+  }
+  return '<div class="step-line">Traste '+base+': '+parts.join(' &middot; ')+'</div>';
+}
+
+// Small card diagram (horizontal, con linea paso a paso)
 function drawNeck(frets, fingers, barre, root, chordNotes){
-  return drawDiagram(frets, root, chordNotes, barre, 150, 180, 22, 34, 20);
+  return drawDiagram(frets, fingers, root, chordNotes, barre, 300, 168, 56, 32, 14)
+    + stepLine(frets, fingers);
 }
 
 // Large modal diagram
 function drawNeckLarge(frets, fingers, barre, root, chordNotes, label, position){
-  var svg = drawDiagram(frets, root, chordNotes, barre, 320, 370, 44, 54, 36);
+  var svg = drawDiagram(frets, fingers, root, chordNotes, barre, 360, 200, 60, 36, 16);
   // Wrap with label
   var wrap = '<div style="width:100%;">';
   if(label || position){
@@ -2259,7 +2138,7 @@ function drawNeckLarge(frets, fingers, barre, root, chordNotes, label, position)
       +'letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:8px;">'
       +(label||'')+' &nbsp;.&nbsp; '+(position||'')+'</div>';
   }
-  wrap += svg + '</div>';
+  wrap += svg + stepLine(frets, fingers) + '</div>';
   return wrap;
 }
 
@@ -2506,14 +2385,6 @@ var currentFontSize = 'md';
 var isCompact = false;
 var currentTuning = 'standard';
 
-function noteName(idx){
-  if(noteStyle==='ES') return NOTES_ES[idx];
-  return NOTES[idx];
-}
-
-function T(key){
-  return key; // simplified -- translations via LANGS if needed
-}
 
 function toggleSettings(){
   var p=document.getElementById('settingsPanel');
@@ -3151,425 +3022,7 @@ window.addEventListener('DOMContentLoaded',function(){
       .catch(function(){});
   }
 });
-// =====================================================
-// COMPOSICION -- AI chord detection
-// =====================================================
-var compKey  = 9;   // default A
-var compMode = 'major';
-var compResultText = '';
 
-// Build key selector grid
-(function(){
-  var grid = document.getElementById('compKeyGrid');
-  if(!grid) return;
-  var NOTES_ALL = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-  NOTES_ALL.forEach(function(n, i){
-    var btn = document.createElement('button');
-    btn.style.cssText = 'padding:5px 2px;background:'+(i===9?'var(--gold)':'var(--s2)')+';border:1px solid '+(i===9?'var(--gold)':'var(--border)')+';color:'+(i===9?'#000':'var(--text)')+';font-family:JetBrains Mono,monospace;font-size:9px;cursor:pointer;transition:all .15s;';
-    btn.textContent = n;
-    btn.dataset.idx = i;
-    btn.onclick = function(){
-      compKey = i;
-      document.querySelectorAll('#compKeyGrid button').forEach(function(b){
-        var active = parseInt(b.dataset.idx) === i;
-        b.style.background = active ? 'var(--gold)' : 'var(--s2)';
-        b.style.borderColor = active ? 'var(--gold)' : 'var(--border)';
-        b.style.color       = active ? '#000' : 'var(--text)';
-      });
-      updateCompLabel();
-    };
-    grid.appendChild(btn);
-  });
-})();
-
-function setCompMode(mode){
-  compMode = mode;
-  var maj = document.getElementById('compMajBtn');
-  var min = document.getElementById('compMinBtn');
-  if(maj){ maj.style.background = mode==='major'?'var(--gold)':'var(--s2)'; maj.style.borderColor = mode==='major'?'var(--gold)':'var(--border)'; maj.style.color = mode==='major'?'#000':'var(--muted)'; }
-  if(min){ min.style.background = mode==='minor'?'var(--purple)':'var(--s2)'; min.style.borderColor = mode==='minor'?'var(--purple)':'var(--border)'; min.style.color = mode==='minor'?'#fff':'var(--muted)'; }
-  updateCompLabel();
-}
-
-function updateCompLabel(){
-  var NOTES_ALL = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-  var lbl = document.getElementById('compKeyLabel');
-  if(lbl) lbl.textContent = 'Tono: '+NOTES_ALL[compKey]+(compMode==='minor'?' menor':' mayor');
-}
-
-function analyzeWithAI(){
-  var lyrics = document.getElementById('compLyrics');
-  var genre  = document.getElementById('compGenre');
-  if(!lyrics || !lyrics.value.trim()){
-    alert('Escribe la letra primero');
-    return;
-  }
-
-  var NOTES_ALL = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-  var keyName   = NOTES_ALL[compKey] + (compMode==='minor'?' menor':' mayor');
-  var genreName = genre ? genre.options[genre.selectedIndex].text : 'cualquier genero';
-
-  // Show loading
-  document.getElementById('compResult').style.display  = 'none';
-  document.getElementById('compError').style.display   = 'none';
-  document.getElementById('compLoading').style.display = 'block';
-  document.getElementById('compAnalyzeBtn').disabled   = true;
-
-  // Animate dots
-  var dotCount = 0;
-  var dotInterval = setInterval(function(){
-    var el = document.getElementById('compDots');
-    if(el) el.textContent = ['...', 'o..', '.o.', '..o'][dotCount%4];
-    dotCount++;
-  }, 400);
-
-  // Build prompt
-  var nl = String.fromCharCode(10);
-  var prompt = [
-    'Eres un experto en cifrado de canciones estilo lacuerda.net.',
-    '',
-    'Cifra esta letra en tonalidad de '+keyName+' ('+genreName+').',
-    '',
-    'LETRA:',
-    lyrics.value.trim(),
-    '',
-    'FORMATO DE RESPUESTA — sigue esto EXACTAMENTE:',
-    'Cada vez que la letra tenga una linea, escribe DOS lineas:',
-    '  LINEA 1: los acordes que suenan en esa linea, separados por espacios, colocados aproximadamente donde cambian (usa espacios para alinear)',
-    '  LINEA 2: la letra de esa linea tal como esta',
-    'Si una linea de letra no tiene cambio de acorde, pon la linea de acordes vacia (linea en blanco antes de la letra).',
-    'Separa cada estrofa/seccion con una linea en blanco.',
-    '',
-    'Al final agrega:',
-    'ACORDES: lista de todos los acordes usados separados por coma',
-    'NOTAS: un consejo breve para tocar esta cancion en el estilo indicado',
-    '',
-    'EJEMPLO (asi debe verse):',
-    'G                              D7',
-    'Una palomita que tenia su nido en un verde naranjo',
-    '              C        D7      G',
-    'lo dejo solito porque su palomo la estaba enganando',
-    '',
-    'G7      C    D7         G',
-    'Hay palomita como le vamos hacer',
-    '                    D7',
-    'si a ti te hirio tu palomo',
-    '           G',
-    'a mi me hirio su querer.',
-    '',
-    'ACORDES: G, D7, C, G7',
-    'NOTAS: Corrido ranchero clasico en Sol mayor.'
-  ].join(nl);
-
-  fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-ipc': 'true'},
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1500,
-      messages: [{role:'user', content: prompt}]
-    })
-  })
-  .then(function(r){ return r.json(); })
-  .then(function(data){
-    clearInterval(dotInterval);
-    document.getElementById('compLoading').style.display = 'none';
-    document.getElementById('compAnalyzeBtn').disabled   = false;
-
-    if(data.error){
-      showCompError('Error de API: ' + data.error.message);
-      return;
-    }
-
-    var text = '';
-    if(data.content && data.content[0]) text = data.content[0].text || '';
-    if(!text){ showCompError('No se recibio respuesta'); return; }
-
-    compResultText = text;
-    renderChordSheet(text);
-  })
-  .catch(function(err){
-    clearInterval(dotInterval);
-    document.getElementById('compLoading').style.display = 'none';
-    document.getElementById('compAnalyzeBtn').disabled   = false;
-    showCompError('Error de conexion: ' + err.message + '. Necesitas conexion a internet para usar la IA.');
-  });
-}
-
-function showCompError(msg){
-  var el = document.getElementById('compError');
-  if(el){
-    el.style.display = 'block';
-    el.innerHTML = '<div style="font-family:Outfit,sans-serif;font-size:13px;color:var(--rose);line-height:1.5;">'
-      + '<strong>Error:</strong> ' + msg + '</div>';
-  }
-}
-
-function renderChordSheet(text){
-  // Split off ACORDES and NOTAS footer
-  var acordesLine = '';
-  var notesText   = '';
-  var bodyText    = text;
-
-  var aIdx = text.search(/\nACORDES:/i);
-  if(aIdx >= 0){
-    bodyText    = text.slice(0, aIdx).trim();
-    var footer  = text.slice(aIdx+1);
-    var nIdx    = footer.search(/\nNOTAS:/i);
-    if(nIdx >= 0){
-      acordesLine = footer.slice(0, nIdx).replace(/^ACORDES:/i,'').trim();
-      notesText   = footer.slice(nIdx+1).replace(/^NOTAS:/i,'').trim();
-    } else {
-      acordesLine = footer.replace(/^ACORDES:/i,'').trim();
-    }
-  }
-
-  // ── Render chord sheet like lacuerda.net ──────────────────────────────
-  // The AI returns alternating: chords-line / lyrics-line pairs.
-  // We render each pair as a <div class="cs-pair"> with chords on top in gold.
-  var sheetEl = document.getElementById('compSheet');
-  if(sheetEl){
-    var lines = bodyText.split('\n');
-    var html  = '';
-    var i     = 0;
-    // Regex: a line is a "chord line" if it contains only chord names + spaces
-    var chordLineRe = /^[\s]*([A-G][#b]?(maj7?|min7?|m7?|7|9|11|13|sus[24]?|dim7?|aug|add9|6|b9)?[\s]+)*[A-G][#b]?(maj7?|min7?|m7?|7|9|11|13|sus[24]?|dim7?|aug|add9|6|b9)?[\s]*$/;
-
-    while(i < lines.length){
-      var line = lines[i];
-      // Empty line = section separator
-      if(line.trim() === ''){
-        html += '<div style="height:14px;"></div>';
-        i++;
-        continue;
-      }
-      // Check if this is a chord line followed by a lyric line
-      if(chordLineRe.test(line) && i+1 < lines.length && lines[i+1].trim() !== ''){
-        var chordLine = line;
-        var lyricLine = lines[i+1];
-        html += '<div class="cs-pair">'
-          + '<div class="cs-chords">'+escChords(chordLine)+'</div>'
-          + '<div class="cs-lyric">'+esc(lyricLine)+'</div>'
-          + '</div>';
-        i += 2;
-      } else {
-        // Solo chord line with no lyric below, or pure lyric line
-        if(chordLineRe.test(line)){
-          html += '<div class="cs-pair">'
-            + '<div class="cs-chords">'+escChords(line)+'</div>'
-            + '<div class="cs-lyric">&nbsp;</div>'
-            + '</div>';
-        } else {
-          html += '<div class="cs-pair">'
-            + '<div class="cs-chords">&nbsp;</div>'
-            + '<div class="cs-lyric">'+esc(line)+'</div>'
-            + '</div>';
-        }
-        i++;
-      }
-    }
-    if(notesText){
-      html += '<div style="margin-top:16px;padding:10px 12px;background:var(--s2);border-left:2px solid var(--gold);">'
-        +'<span style="font-family:Outfit,sans-serif;font-size:11px;color:var(--muted);font-style:italic;">'
-        + esc(notesText) + '</span></div>';
-    }
-    sheetEl.innerHTML = html;
-  }
-
-  // ── Render chord pills ────────────────────────────────────────────────
-  var pillsEl = document.getElementById('compChordPills');
-  if(pillsEl){
-    pillsEl.innerHTML = '';
-    // If no ACORDES line, extract unique chords from body
-    var chordSet = [];
-    if(acordesLine){
-      chordSet = acordesLine.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
-    } else {
-      // extract from body
-      var bodyChordRe = /\b([A-G][#b]?(maj7?|min7?|m7?|7|9|11|13|sus[24]?|dim7?|aug|add9|6|b9)?)\b/g;
-      var seen = {};
-      var m2;
-      while((m2 = bodyChordRe.exec(bodyText)) !== null){
-        if(!seen[m2[1]]){ seen[m2[1]]=true; chordSet.push(m2[1]); }
-      }
-    }
-    chordSet.forEach(function(ch){
-      var pill = document.createElement('button');
-      pill.style.cssText = 'font-family:JetBrains Mono,monospace;font-size:11px;padding:5px 12px;'
-        +'background:var(--s2);border:1px solid var(--gold);color:var(--gold);cursor:pointer;transition:all .15s;';
-      pill.textContent = ch;
-      pill.onclick = function(){
-        var parsed = parseChord(ch);
-        if(parsed && parsed.root >= 0){
-          var ctFound = CHORD_TYPES.find(function(ct){ return ct.sym === parsed.suffix; });
-          if(!ctFound) ctFound = CHORD_TYPES[0];
-          gRoot = parsed.root;
-          gType = CHORD_TYPES.indexOf(ctFound);
-          if(gType < 0) gType = 0;
-          var tabs = document.querySelectorAll('.nav-tab');
-          showPage('guitar', tabs[1]);
-          setTimeout(function(){
-            document.querySelectorAll('.root-btn').forEach(function(b,j){ b.classList.toggle('active',j===gRoot); });
-            document.querySelectorAll('.type-btn').forEach(function(b,j){ b.classList.toggle('active',j===gType); });
-            gRenderDiagram();
-          }, 200);
-        }
-      };
-      pillsEl.appendChild(pill);
-    });
-  }
-
-  document.getElementById('compResult').style.display = 'block';
-}
-
-// helpers for renderChordSheet
-function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function escChords(line){
-  // Split chord line preserving spaces, color each chord token in gold
-  return line.replace(/([A-G][#b]?(maj7?|min7?|m7?|7|9|11|13|sus[24]?|dim7?|aug|add9|6|b9)?)/g,
-    function(m){ return '<span class="cs-chord-token">'+m+'</span>'; });
-}
-
-function copyChordSheet(){
-  var text = compResultText;
-  if(!text) return;
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(function(){
-      var btn = document.querySelector('[onclick="copyChordSheet()"]');
-      if(btn){ var orig=btn.textContent; btn.textContent='Copiado!'; setTimeout(function(){ btn.textContent=orig; },1500); }
-    });
-  }
-}
-
-function saveToNotes(){
-  var lyrics = document.getElementById('compLyrics');
-  var NOTES_ALL = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-  var title = 'Cifrado en ' + NOTES_ALL[compKey] + (compMode==='minor'?' m':'') + ' - ' + new Date().toLocaleDateString();
-  var body  = compResultText;
-  if(!body) return;
-  var notes = getNotes();
-  notes.unshift({id:Date.now(), title:title, body:body, ts:new Date().toLocaleDateString()});
-  saveNotesList(notes);
-  var btn = document.querySelector('[onclick="saveToNotes()"]');
-  if(btn){ var orig=btn.textContent; btn.textContent='Guardado!'; btn.style.background='var(--green)'; setTimeout(function(){ btn.textContent=orig; btn.style.background='var(--teal)'; },1500); }
-}
-
-// Init label
-updateCompLabel();
-
-// =====================================================
-// VOZ -- Web Speech API voice recognition
-// =====================================================
-var compRecognition = null;
-var compIsListening = false;
-var compInterimText = '';
-
-function toggleVoice(){
-  if(compIsListening){
-    stopVoice();
-  } else {
-    startVoice();
-  }
-}
-
-function startVoice(){
-  var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SpeechRecognition){
-    alert('Tu navegador no soporta reconocimiento de voz. Usa Chrome en Android.');
-    return;
-  }
-
-  compRecognition = new SpeechRecognition();
-  compRecognition.continuous    = true;   // keep listening
-  compRecognition.interimResults= true;   // show partial results
-  compRecognition.lang          = 'es-MX'; // Mexican Spanish
-  compRecognition.maxAlternatives = 1;
-
-  compRecognition.onstart = function(){
-    compIsListening = true;
-    var btn  = document.getElementById('compMicBtn');
-    var lbl  = document.getElementById('compMicLabel');
-    var icon = document.getElementById('compMicIcon');
-    if(btn){ btn.style.background='#fb7185'; btn.style.borderColor='#fb7185'; btn.style.color='#fff'; }
-    if(lbl) lbl.textContent = 'PARAR';
-    if(icon) icon.style.animation = 'micPulse 1s ease infinite';
-    // Show listening indicator in textarea
-    var ta = document.getElementById('compLyrics');
-    if(ta && !ta.value) ta.placeholder = 'Escuchando... canta o habla la letra';
-  };
-
-  compRecognition.onresult = function(event){
-    var ta = document.getElementById('compLyrics');
-    if(!ta) return;
-
-    var final   = '';
-    var interim = '';
-    for(var i = event.resultIndex; i < event.results.length; i++){
-      var transcript = event.results[i][0].transcript;
-      if(event.results[i].isFinal){
-        final += transcript + String.fromCharCode(10);
-      } else {
-        interim = transcript;
-      }
-    }
-
-    // Append final text to textarea
-    if(final){
-      ta.value = (ta.value || '') + final;
-    }
-
-    // Show interim result as placeholder hint
-    compInterimText = interim;
-    if(interim){
-      ta.style.borderColor = '#f5c842';
-    } else {
-      ta.style.borderColor = '';
-    }
-  };
-
-  compRecognition.onerror = function(event){
-    stopVoice();
-    if(event.error === 'not-allowed'){
-      alert('Permiso de microfono denegado. Ve a Configuracion > Permisos del sitio y activa el microfono.');
-    } else if(event.error === 'no-speech'){
-      // Normal - just stopped hearing
-    } else {
-      alert('Error de microfono: ' + event.error);
-    }
-  };
-
-  compRecognition.onend = function(){
-    // Auto-restart if still supposed to be listening
-    if(compIsListening && compRecognition){
-      try{ compRecognition.start(); }catch(e){ stopVoice(); }
-    }
-  };
-
-  try{
-    compRecognition.start();
-  } catch(e){
-    alert('No se pudo iniciar el microfono: ' + e.message);
-  }
-}
-
-function stopVoice(){
-  compIsListening = false;
-  if(compRecognition){
-    try{ compRecognition.stop(); }catch(e){}
-    compRecognition = null;
-  }
-  var btn  = document.getElementById('compMicBtn');
-  var lbl  = document.getElementById('compMicLabel');
-  var icon = document.getElementById('compMicIcon');
-  var ta   = document.getElementById('compLyrics');
-  if(btn){ btn.style.background=''; btn.style.borderColor=''; btn.style.color=''; }
-  if(lbl) lbl.textContent = 'VOZ';
-  if(icon) icon.style.animation = '';
-  if(ta){
-    ta.style.borderColor = '';
-    if(!ta.value) ta.placeholder = 'Escribe la letra aqui...';
-  }
-}
 
 // =====================================================
 // ONBOARDING
@@ -3602,8 +3055,6 @@ function finishOnboarding(){
     setTimeout(function(){ el.style.display='none'; }, 400);
   }
   localStorage.setItem(OB_KEY, '1');
-  // After onboarding, request mic permission
-  requestMicPermission();
 }
 
 // Check on load — show onboarding if first time
@@ -3615,59 +3066,6 @@ window.addEventListener('DOMContentLoaded', function(){
   }
 });
 
-// =====================================================
-// MICROPHONE PERMISSION REQUEST
-// =====================================================
-function requestMicPermission(){
-  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
-  // Check if already granted
-  if(navigator.permissions){
-    navigator.permissions.query({name:'microphone'}).then(function(result){
-      if(result.state === 'prompt'){
-        showMicPermissionDialog();
-      }
-    }).catch(function(){
-      // permissions API not available, skip
-    });
-  }
-}
-
-function showMicPermissionDialog(){
-  var overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:700;display:flex;align-items:center;justify-content:center;padding:24px;';
-  overlay.innerHTML =
-    '<div style="background:#0e0f1a;border:1px solid #1e2035;border-top:3px solid #f5c842;padding:24px;max-width:320px;width:100%;text-align:center;">'
-    +'<div style="font-size:40px;margin-bottom:12px;">🎤</div>'
-    +'<div style="font-family:Bebas Neue,sans-serif;font-size:26px;letter-spacing:3px;color:#f5c842;margin-bottom:8px;">MICROFONO</div>'
-    +'<div style="font-family:Outfit,sans-serif;font-size:13px;color:#8888aa;line-height:1.6;margin-bottom:20px;">'
-    +'ChordLab puede usar tu microfono para transcribir la letra de tus canciones con voz. Solo se usa cuando tocas el boton VOZ en la pestana Composicion. No grabamos ni guardamos audio.'
-    +'</div>'
-    +'<div style="display:flex;gap:8px;">'
-    +'<button onclick="denyMic(this)" style="flex:1;background:var(--s2,#161726);border:1px solid #1e2035;color:#4a4d6a;font-family:JetBrains Mono,monospace;font-size:10px;letter-spacing:1px;padding:10px;cursor:pointer;">AHORA NO</button>'
-    +'<button onclick="allowMic(this)" style="flex:1;background:#f5c842;border:none;color:#000;font-family:Bebas Neue,sans-serif;font-size:16px;letter-spacing:2px;padding:10px;cursor:pointer;">PERMITIR</button>'
-    +'</div>'
-    +'</div>';
-  document.body.appendChild(overlay);
-
-  window._micOverlay = overlay;
-}
-
-function allowMic(btn){
-  if(window._micOverlay) window._micOverlay.remove();
-  // Trigger the actual browser permission dialog
-  navigator.mediaDevices.getUserMedia({audio:true})
-    .then(function(stream){
-      // Permission granted — stop stream immediately, we just needed the permission
-      stream.getTracks().forEach(function(t){ t.stop(); });
-    })
-    .catch(function(){
-      // User denied in browser dialog
-    });
-}
-
-function denyMic(btn){
-  if(window._micOverlay) window._micOverlay.remove();
-}
 
 // =====================================================
 // PRIVACY POLICY LINK in settings
@@ -3675,7 +3073,7 @@ function denyMic(btn){
 window.addEventListener('DOMContentLoaded', function(){
   var ver = document.getElementById('set-version');
   if(ver){
-    ver.innerHTML = 'CHORD LAB v2.0 &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;font-size:9px;" target="_blank">Privacidad</a>';
+    ver.innerHTML = 'CHORD LAB v2.1 Optimizado &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;font-size:9px;" target="_blank">Privacidad</a>';
   }
 });
 
@@ -3706,7 +3104,7 @@ function setLanguage(code){
   buildLangGrid();
   // Update nav tabs labels
   var tabs = document.querySelectorAll('.nav-tab .tab-lbl');
-  var labels = ['Circulo','Guitarra','Generos','Practica','Notas','Glosario','Composicion'];
+  var labels = ['Circulo','Guitarra','Generos','Practica','Notas','Glosario'];
   tabs.forEach(function(t,i){ if(labels[i]) t.textContent = labels[i]; });
 }
 
@@ -3904,7 +3302,7 @@ window.addEventListener('DOMContentLoaded', function(){
       <button onclick="clearAllData()" style="width:100%;background:var(--s2);border:1px solid var(--rose);color:var(--rose);font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:10px;cursor:pointer;">Borrar todos mis datos</button>
     </div>
 
-    <div class="set-version" id="set-version">CHORD LAB v2.0 &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;" target="_blank">Privacidad</a></div>
+    <div class="set-version" id="set-version">CHORD LAB v2.1 Optimizado &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;" target="_blank">Privacidad</a></div>
 
   </div>
 </div>
