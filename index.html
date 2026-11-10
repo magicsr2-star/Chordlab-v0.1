@@ -371,6 +371,8 @@ svg.fretboard{display:block;width:100%;height:auto;min-width:300px;min-height:90
   animation:modalIn .22s cubic-bezier(.4,0,.2,1);
 }
 @keyframes modalIn{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
+@keyframes clDotPop{from{opacity:0;transform:scale(0);}to{opacity:1;transform:scale(1);}}
+.cl-anim-dot{opacity:0;transform-box:fill-box;transform-origin:center;animation:clDotPop .45s cubic-bezier(.34,1.56,.64,1) forwards;}
 .modal-header{
   display:flex;align-items:center;justify-content:space-between;
   padding:16px 18px 12px;border-bottom:1px solid var(--border);
@@ -994,7 +996,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoritos', noFavs:'Aun no tienes favoritos',
       saveFav:'Toca [+] en cualquier progresion para guardarla',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.6 Tonal . Para musicos'
+      version:'CHORD LAB v2.8 Tonal . Para musicos'
     }
   },
   'en': {
@@ -1015,7 +1017,7 @@ var LANGS = {
       savedfavs:'[FAV] Favorites', noFavs:'No favorites yet',
       saveFav:'Tap [+] on any progression to save it',
       metronome:'Metronome', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.6 Tonal . For musicians'
+      version:'CHORD LAB v2.8 Tonal . For musicians'
     }
   },
   'pt': {
@@ -1036,7 +1038,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoritos', noFavs:'Sem favoritos ainda',
       saveFav:'Toque [+] em qualquer progressao para salvar',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.6 Tonal . Para musicos'
+      version:'CHORD LAB v2.8 Tonal . Para musicos'
     }
   },
   'fr': {
@@ -1057,7 +1059,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoris', noFavs:'Aucun favori',
       saveFav:'Appuyez sur [+] pour sauvegarder',
       metronome:'Metronome', bpm:'BPM', play:'> JOUER', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.6 Tonal . Pour musiciens'
+      version:'CHORD LAB v2.8 Tonal . Pour musiciens'
     }
   },
   'de': {
@@ -1078,7 +1080,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoriten', noFavs:'Keine Favoriten',
       saveFav:'Tippe [+] auf eine Progression',
       metronome:'Metronom', bpm:'BPM', play:'> ABSPIELEN', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.6 Tonal . Fur Musiker'
+      version:'CHORD LAB v2.8 Tonal . Fur Musiker'
     }
   },
   'it': {
@@ -1099,7 +1101,7 @@ var LANGS = {
       savedfavs:'[FAV] Preferiti', noFavs:'Nessun preferito',
       saveFav:'Tocca [+] su qualsiasi progressione',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.6 Tonal . Per musicisti'
+      version:'CHORD LAB v2.8 Tonal . Per musicisti'
     }
   },
 };
@@ -1661,7 +1663,7 @@ function gBuildTypeList(){
   });
 }
 
-// ---- Motor de acordes con Tonal v2.6 ----
+// ---- Motor de acordes con Tonal v2.7 ----
 // Tonal (@tonaljs/tonal 4.10.0) va empaquetado dentro del archivo: sigue 100% offline.
 // Solo parsea y transpone; las 87 posturas curadas y los diagramas no se tocan.
 // Tonal escribe "madd9"; la app escribe "m(add9)" (alias solo para la consulta).
@@ -1911,7 +1913,7 @@ function getVoicings(root,ct){
   }
 
   if(shapes && shapes.length > 0){
-    return shapes.map(function(s){
+    var out = shapes.map(function(s){
       return {
         label: s.lbl,
         frets: s.f,
@@ -1920,6 +1922,15 @@ function getVoicings(root,ct){
         position: s.pos
       };
     });
+    // La menor sierreña tambien va en los menores con forma curada
+    // (Fa menor, Sol menor, La menor...), no solo en los calculados. v2.7.
+    if(ct.sym==='m'){
+      var bfMc=(root-7+12)%12; if(bfMc===0) bfMc=12;
+      if(bfMc>=2 && bfMc<=12){
+        out.push({label:'Sierreño (menor)',frets:[-1,-1,-1,bfMc,bfMc-1,bfMc-2],fingers:[0,0,0,3,2,1],barre:null,position:'Traste '+(bfMc-2)+'-'+bfMc});
+      }
+    }
+    return out;
   }
 
   // Fallback practico: solo posturas reales tocables (al menos 3 notas
@@ -1968,6 +1979,15 @@ function getVoicings(root,ct){
         voicings.push({label:'Sierreño (Fa)',frets:[-1,-1,bfF,bfF-1,bfF-2,-1],fingers:[0,0,3,2,1,0],barre:null,position:'Traste '+(bfF-2)+'-'+bfF});
       }
     }
+    // Posicion sierreña menor: la misma pisada de Fa, pero en 1a, 2a y 3a
+    // cuerda (eso la vuelve menor: el par Sol-Si baja la 3a medio tono).
+    // Fa menor, Sol menor, La menor, cada dos trastes. v2.7.
+    if(ct.sym==='m'){
+      var bfM=(root-7+12)%12; if(bfM===0) bfM=12;
+      if(bfM>=2 && bfM<=12){
+        voicings.push({label:'Sierreño (menor)',frets:[-1,-1,-1,bfM,bfM-1,bfM-2],fingers:[0,0,0,3,2,1],barre:null,position:'Traste '+(bfM-2)+'-'+bfM});
+      }
+    }
     if(dp && bfC>=1 && bfC<=12){
       var doFrets=dp.f.map(function(r){return r===0?bfC:(r===-1?-1:bfC+r);});
       var doBarre=null;
@@ -2010,7 +2030,7 @@ function getVoicings(root,ct){
     }
     voicings.push({label:'Voicing',frets:fb,fingers:autoFingers(fb,null),barre:null,position:'Variable'});
   }
-  return voicings.slice(0, (ct.sym==='' || ct.sym==='7') ? 4 : 3);
+  return voicings.slice(0, (ct.sym==='' || ct.sym==='7' || ct.sym==='m') ? 4 : 3);
 }
 function autoFingers(frets,barre){
   var used=frets.filter(function(f){return f>0;});
@@ -2099,6 +2119,55 @@ function gBuildFretboard(root, ivs){
 // (dedos 2-3-4, no cejilla). v2.3.
 var FINGER_COLORS = {1:'#38bdf8', 2:'#22c55e', 3:'#f59e0b', 4:'#f472b6'};
 var FINGER_NAMES  = {1:'Indice', 2:'Medio', 3:'Anular', 4:'Menique'};
+var FINGER_NAMES_DISP = {1:'Índice', 2:'Medio', 3:'Anular', 4:'Meñique'};
+var STRING_ORD = ['primera','segunda','tercera','cuarta','quinta','sexta'];
+
+// Pasos de la animacion dedo por dedo (v2.8): un paso por dedo (1-4), en orden.
+// La cejilla es el dedo 1 y es el primer paso. Cada paso agrupa las cuerdas
+// que ese dedo pisa en el mismo traste. Devuelve
+// [{finger,name,fret,isBarre,stringNums:[...]}] ordenado por dedo.
+function fingerSteps(frets, fingers, barre){
+  var steps = [];
+  var hasBarre = !!(barre && barre.fret > 0);
+  // La cejilla solo es un paso si de verdad se dibuja: al menos una cuerda
+  // pisa en su traste. Las cejillas calculadas a veces guardan un traste
+  // sin ninguna cuerda en el, y el diagrama no dibuja cejilla en ese caso.
+  if(hasBarre){
+    var barreReal = false;
+    for(var bi=0; bi<6; bi++){ if(frets[bi]===barre.fret){ barreReal = true; break; } }
+    if(!barreReal) hasBarre = false;
+  }
+  function findStep(finger, fret, isBarre){
+    for(var j=0;j<steps.length;j++){
+      if(steps[j].finger===finger && steps[j].fret===fret && steps[j].isBarre===isBarre) return steps[j];
+    }
+    var s = {finger:finger, name:FINGER_NAMES_DISP[finger], fret:fret, isBarre:isBarre, stringNums:[]};
+    steps.push(s);
+    return s;
+  }
+  if(hasBarre) findStep(1, barre.fret, true);
+  for(var i=0;i<6;i++){
+    var f = frets[i];
+    var fg = (fingers && fingers[i]>0) ? fingers[i] : 0;
+    if(f>0 && fg>0){
+      // Cuerdas en el traste de la cejilla las cubre la cejilla, no son paso aparte
+      if(hasBarre && f===barre.fret) continue;
+      findStep(fg, f, false).stringNums.push(6 - i);
+    }
+  }
+  steps.sort(function(a,b){ return a.finger - b.finger; });
+  return steps;
+}
+
+// Texto de un paso, en el formato del usuario:
+// "Dedo 1 · Índice — traste 1, segunda cuerda" / "Dedo 1 · Índice — cejilla, traste 3"
+function fingerStepText(step){
+  var base = 'Dedo ' + step.finger + ' · ' + step.name + ' — ';
+  if(step.isBarre) return base + 'cejilla, traste ' + step.fret;
+  var ords = step.stringNums.map(function(n){ return STRING_ORD[n-1]; });
+  var cuerdas = ords.length === 1 ? (ords[0] + ' cuerda') : (ords.join(' y ') + ' cuerdas');
+  return base + 'traste ' + step.fret + ', ' + cuerdas;
+}
 
 // Leyenda de dedos para Guitarra y el modal: que color/numero es cada dedo.
 function fingerLegendHTML(){
@@ -2118,13 +2187,19 @@ function fingerLegendHTML(){
     cejilla a la izquierda, trastes creciendo a la derecha,
     cuerda grave E (6a) arriba y aguda e (1a) abajo.
     frets: [E A D G B e] -1=muda, 0=al aire. fingers: dedo 1-4 por cuerda. */
-function drawDiagram(frets, fingers, root, chordNotes, explicitBarre, W, H, pL, pT, pB){
+function drawDiagram(frets, fingers, root, chordNotes, explicitBarre, W, H, pL, pT, pB, anim){
   var STR = 6, VF = 5;
   var pR  = Math.round(W*0.04);
   var fw  = (W - pL - pR) / VF;
   var sh  = (H - pT - pB) / (STR-1);
   var dotR = Math.min(fw, sh) * 0.36;
   fingers = fingers || frets.map(function(){ return 0; });
+  // Animacion dedo por dedo (v2.8): pasos y retardo de la cejilla
+  var animSteps = null, animBarreDelay = 0;
+  if(anim){
+    animSteps = fingerSteps(frets, fingers, explicitBarre);
+    for(var ai=0; ai<animSteps.length; ai++){ if(animSteps[ai].isBarre){ animBarreDelay = ai*1000; break; } }
+  }
 
   // Primer traste visible (sf = traste anterior al mas bajo pisado)
   var pressed = frets.filter(function(f){ return f>0; });
@@ -2194,11 +2269,13 @@ function drawDiagram(frets, fingers, root, chordNotes, explicitBarre, W, H, pL, 
       var bx  = fretX(barre.fret);
       var by1 = pT + barre.fromStr*sh;
       var by2 = pT + barre.toStr*sh;
+      if(anim) svg += '<g class="cl-anim-dot" style="animation-delay:'+animBarreDelay+'ms">';
       svg += '<rect x="'+(bx-dotR*0.9)+'" y="'+(by1-dotR)+'" width="'+(dotR*1.8)+'" height="'+((by2-by1)+dotR*2)+'"'
         + ' rx="'+dotR+'" fill="'+FINGER_COLORS[1]+'" opacity="0.95"/>';
       svg += '<text x="'+bx+'" y="'+(((by1+by2)/2)+Math.round(dotR*0.4))+'"'
         + ' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.8)+'"'
         + ' font-weight="bold" fill="#000" text-anchor="middle">'+barre.fret+'</text>';
+      if(anim) svg += '</g>';
       // Solo la cuerda que suena en el traste de la cejilla queda tapada:
       // un dedo por encima de la cejilla si se dibuja (v2.4).
       for(var bi2=barre.fromStr; bi2<=barre.toStr; bi2++){ if(frets[bi2]===barre.fret) barreStringSet[bi2] = true; }
@@ -2230,12 +2307,21 @@ function drawDiagram(frets, fingers, root, chordNotes, explicitBarre, W, H, pL, 
         var dx  = fretX(fi);
         var fgr = (fingers[si] && fingers[si]>0) ? fingers[si] : null;
         var dotFill = (fgr && FINGER_COLORS[fgr]) ? FINGER_COLORS[fgr] : '#22c55e';
+        // Retardo del paso de este dedo (v2.8): el punto aparece con su paso
+        var animDelay = -1;
+        if(anim && fgr){
+          for(var aj=0; aj<animSteps.length; aj++){
+            if(!animSteps[aj].isBarre && animSteps[aj].finger===fgr && animSteps[aj].fret===fi){ animDelay = aj*1000; break; }
+          }
+        }
+        if(animDelay>=0) svg += '<g class="cl-anim-dot" style="animation-delay:'+animDelay+'ms">';
         svg += '<circle cx="'+dx+'" cy="'+cy+'" r="'+dotR+'" fill="'+dotFill+'"'
           + (isR ? ' stroke="#f5c842" stroke-width="2"' : '') + '/>';
         svg += '<text x="'+dx+'" y="'+(cy + Math.round(dotR*0.38))+'"'
           + ' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.75)+'"'
           + ' font-weight="bold" fill="#000" text-anchor="middle">'
           + (fgr ? fgr : noteName(pit)) + '</text>';
+        if(animDelay>=0) svg += '</g>';
       }
     }
   }
@@ -2282,6 +2368,52 @@ function drawNeckLarge(frets, fingers, barre, root, chordNotes, label, position)
   }
   wrap += fingerLegendHTML() + svg + stepLine(frets, fingers) + '</div>';
   return wrap;
+}
+
+// Modal grande con animacion dedo por dedo (v2.8): los puntos aparecen uno
+// por uno con su numero y su color, y el texto del paso va cambiando.
+var animTimers = [];
+function clearFingerAnim(){
+  animTimers.forEach(function(t){ clearTimeout(t); });
+  animTimers = [];
+}
+function drawNeckLargeAnim(frets, fingers, barre, root, chordNotes, label, position){
+  var svg = drawDiagram(frets, fingers, root, chordNotes, barre, 360, 200, 60, 36, 16, true);
+  var wrap = '<div style="width:100%;">';
+  if(label || position){
+    wrap += '<div style="font-family:JetBrains Mono,monospace;font-size:10px;color:#f97316;'
+      +'letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:8px;">'
+      +(label||'')+' &nbsp;.&nbsp; '+(position||'')+'</div>';
+  }
+  wrap += fingerLegendHTML() + svg;
+  wrap += '<div id="animStepText" style="min-height:20px;font-family:JetBrains Mono,monospace;font-size:11px;color:#e5e7eb;text-align:center;margin:10px 0 2px;">Mira dónde va cada dedo…</div>';
+  wrap += stepLine(frets, fingers) + '</div>';
+  return wrap;
+}
+function startFingerAnim(root, ct, vi){
+  clearFingerAnim();
+  var voicings = getVoicings(root, ct);
+  var v = voicings[vi||0];
+  if(!v) return;
+  var chordNotes = new Set(ct.iv.map(function(iv){ return (root+iv)%12; }));
+  var nameES = NOTES[root]+ct.sym;
+  var steps = fingerSteps(v.frets, v.fingers, v.barre);
+  var inner = document.getElementById('modalDiagramInner');
+  if(inner){
+    inner.innerHTML = drawNeckLargeAnim(v.frets, v.fingers, v.barre, root, chordNotes, v.label, v.position);
+  }
+  var btn = document.getElementById('animBtn');
+  if(btn) btn.textContent = '↻ Repetir';
+  steps.forEach(function(st, idx){
+    animTimers.push(setTimeout(function(){
+      var t = document.getElementById('animStepText');
+      if(t){
+        var txt = fingerStepText(st);
+        if(idx === steps.length-1) txt += ' · ¡Listo! ' + nameES;
+        t.textContent = txt;
+      }
+    }, idx*1000));
+  });
 }
 
 
@@ -2803,11 +2935,13 @@ renderProgs=function(g,keyStr){
 // CHORD MODAL
 // ===================================================
 function closeModal(){
+  clearFingerAnim();
   var m=document.getElementById('chordModal');
   if(m) m.style.display='none';
 }
 
 function openChordModal(root,ct,voicingIdx){
+  clearFingerAnim();
   var voicings=getVoicings(root,ct);
   var vi=voicingIdx||0;
   var nameES=NOTES[root]+ct.sym;
@@ -2840,10 +2974,17 @@ function openChordModal(root,ct,voicingIdx){
     spk.textContent='🔊 Escuchar';
     spk.onclick=function(){ playChord(v.frets); };
     tabsEl.appendChild(spk);
+    // Animacion dedo por dedo (v2.8)
+    var abtn=document.createElement('button');
+    abtn.id='animBtn';
+    abtn.style.cssText='font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border:1px solid #38bdf8;background:#0d0e18;color:#38bdf8;cursor:pointer;margin-right:4px;margin-bottom:4px;';
+    abtn.textContent='▶ Dedo por dedo';
+    abtn.onclick=function(){ startFingerAnim(root,ct,vi); };
+    tabsEl.appendChild(abtn);
   }
   var diagWrap=document.getElementById('modalDiagramWrap');
   if(diagWrap){
-    var html = drawNeckLarge(v.frets,v.fingers,v.barre,root,chordNotes,v.label,v.position);
+    var html = '<div id="modalDiagramInner">' + drawNeckLarge(v.frets,v.fingers,v.barre,root,chordNotes,v.label,v.position) + '</div>';
 
     // Usage info block
     var key = NOTES[root]+ct.sym;
@@ -3248,7 +3389,7 @@ window.addEventListener('DOMContentLoaded', function(){
 window.addEventListener('DOMContentLoaded', function(){
   var ver = document.getElementById('set-version');
   if(ver){
-    ver.innerHTML = 'CHORD LAB v2.6 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;font-size:9px;" target="_blank">Privacidad</a>';
+    ver.innerHTML = 'CHORD LAB v2.8 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;font-size:9px;" target="_blank">Privacidad</a>';
   }
 });
 
@@ -3477,7 +3618,7 @@ window.addEventListener('DOMContentLoaded', function(){
       <button onclick="clearAllData()" style="width:100%;background:var(--s2);border:1px solid var(--rose);color:var(--rose);font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:10px;cursor:pointer;">Borrar todos mis datos</button>
     </div>
 
-    <div class="set-version" id="set-version">CHORD LAB v2.6 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;" target="_blank">Privacidad</a></div>
+    <div class="set-version" id="set-version">CHORD LAB v2.8 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;" target="_blank">Privacidad</a></div>
 
   </div>
 </div>
