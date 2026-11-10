@@ -717,8 +717,8 @@ body.compact .plabel{margin-bottom:6px;}
     <div class="onboard-title">Acordes de <em>Guitarra</em></div>
     <div class="ob-how">Lo que ves en cada diagrama:</div>
     <div class="ob-steps">
-      <div class="ob-step"><span class="ob-num" style="background:#22c55e;color:#000;">1</span>Punto verde = dedo que pisa (el numero es el dedo: 1 indice, 2 medio, 3 anular, 4 menique)</div>
-      <div class="ob-step"><span class="ob-num" style="background:#22c55e;color:#000;">C</span>Barra verde = cejilla con el dedo 1 en varias cuerdas</div>
+      <div class="ob-step"><span class="ob-num" style="background:#38bdf8;color:#000;">1</span>Punto de color = dedo que pisa (el numero y el color son el dedo: 1 indice azul, 2 medio verde, 3 anular ambar, 4 menique rosa)</div>
+      <div class="ob-step"><span class="ob-num" style="background:#38bdf8;color:#000;">C</span>Barra azul = cejilla con el dedo 1 en varias cuerdas</div>
       <div class="ob-step"><span class="ob-num" style="background:#e04060;">X</span>X roja = no tocar &nbsp;·&nbsp; O = cuerda al aire &nbsp;·&nbsp; numero arriba = traste</div>
     </div>
     <div class="ob-tip">Toca cualquier diagrama para verlo en GRANDE con info de uso en corrido y norteno</div>
@@ -2089,7 +2089,7 @@ function drawDiagram(frets, fingers, root, chordNotes, explicitBarre, W, H, pL, 
     }
   }
 
-  // -- Puntos por cuerda: verde con numero de dedo ------------------
+  // -- Puntos por cuerda: color del dedo con su numero dentro --------
   for(var si=0; si<STR; si++){
     var fi  = frets[si];
     var cy  = pT + si*sh;
@@ -2108,7 +2108,7 @@ function drawDiagram(frets, fingers, root, chordNotes, explicitBarre, W, H, pL, 
         + ' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.7)+'"'
         + ' font-weight="bold" fill="#22c55e" text-anchor="middle">O</text>';
     } else {
-      // Pisada: punto verde con el numero de dedo dentro
+      // Pisada: punto con el color del dedo y su numero dentro
       var row = fi - sf;
       if(row >= 1 && row <= VF && !barreStringSet[si]){
         var dx  = fretX(fi);
