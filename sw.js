@@ -1,5 +1,5 @@
-// CHORD LAB Service Worker v3
-var CACHE = 'chordlab-v3';
+// CHORD LAB Service Worker v4
+var CACHE = 'chordlab-v4';
 var ASSETS = [
   './',
   './index.html',

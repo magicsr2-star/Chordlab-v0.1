@@ -996,7 +996,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoritos', noFavs:'Aun no tienes favoritos',
       saveFav:'Toca [+] en cualquier progresion para guardarla',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.8 Tonal . Para musicos'
+      version:'CHORD LAB v2.9 Tonal . Para musicos'
     }
   },
   'en': {
@@ -1017,7 +1017,7 @@ var LANGS = {
       savedfavs:'[FAV] Favorites', noFavs:'No favorites yet',
       saveFav:'Tap [+] on any progression to save it',
       metronome:'Metronome', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.8 Tonal . For musicians'
+      version:'CHORD LAB v2.9 Tonal . For musicians'
     }
   },
   'pt': {
@@ -1038,7 +1038,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoritos', noFavs:'Sem favoritos ainda',
       saveFav:'Toque [+] em qualquer progressao para salvar',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.8 Tonal . Para musicos'
+      version:'CHORD LAB v2.9 Tonal . Para musicos'
     }
   },
   'fr': {
@@ -1059,7 +1059,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoris', noFavs:'Aucun favori',
       saveFav:'Appuyez sur [+] pour sauvegarder',
       metronome:'Metronome', bpm:'BPM', play:'> JOUER', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.8 Tonal . Pour musiciens'
+      version:'CHORD LAB v2.9 Tonal . Pour musiciens'
     }
   },
   'de': {
@@ -1080,7 +1080,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoriten', noFavs:'Keine Favoriten',
       saveFav:'Tippe [+] auf eine Progression',
       metronome:'Metronom', bpm:'BPM', play:'> ABSPIELEN', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.8 Tonal . Fur Musiker'
+      version:'CHORD LAB v2.9 Tonal . Fur Musiker'
     }
   },
   'it': {
@@ -1101,7 +1101,7 @@ var LANGS = {
       savedfavs:'[FAV] Preferiti', noFavs:'Nessun preferito',
       saveFav:'Tocca [+] su qualsiasi progressione',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.8 Tonal . Per musicisti'
+      version:'CHORD LAB v2.9 Tonal . Per musicisti'
     }
   },
 };
@@ -1410,7 +1410,7 @@ var CHORD_SHAPES = {
          {f:[10,12,12,11,10,10],fg:[1,3,4,2,1,1],b:{fret:10,fromStr:0,toStr:5},lbl:'Cejilla 10',pos:'Traste 10-12',genre:'Posicion alta -- solo o riff'}],
   'E':  [{f:[0,2,2,1,0,0],fg:[0,2,3,1,0,0],b:null,lbl:'Abierta',pos:'Traste 0-2',genre:'Corrido, Norteno, Blues -- la forma E es la base'},
          {f:[7,7,9,9,9,7],fg:[1,1,3,3,3,1],b:{fret:7,fromStr:0,toStr:5},lbl:'Cejilla 7',pos:'Traste 7-9',genre:'Sierreno, Corrido en Si'},
-         {f:[12,12,14,14,14,12],fg:[1,1,3,3,3,1],b:{fret:12,fromStr:0,toStr:5},lbl:'Cejilla 12',pos:'Traste 12',genre:'Registro alto -- melodico'}],
+         {f:[12,14,14,13,12,12],fg:[1,3,4,2,1,1],b:{fret:12,fromStr:0,toStr:5},lbl:'Cejilla 12',pos:'Traste 12-14',genre:'Registro alto -- melodico'}],
   'G':  [{f:[3,2,0,0,0,3],fg:[2,1,0,0,0,3],b:null,lbl:'Abierta',pos:'Traste 0-3',genre:'Norteno, Corrido, Ranchero'},
          {f:[3,5,5,4,3,3],fg:[1,3,4,2,1,1],b:{fret:3,fromStr:0,toStr:5},lbl:'Cejilla 3',pos:'Traste 3-5',genre:'Cumbia, Sierreno'}],
   'A':  [{f:[-1,0,2,2,2,0],fg:[0,0,2,3,4,0],b:null,lbl:'Abierta',pos:'Traste 0-2',genre:'Norteno, Corrido -- base del 80% de corridos en La'},
@@ -1420,14 +1420,14 @@ var CHORD_SHAPES = {
          {f:[7,9,9,8,7,7],fg:[1,3,4,2,1,1],b:{fret:7,fromStr:0,toStr:5},lbl:'Cejilla 7',pos:'Traste 7-9',genre:'Sierreno, Ranchero'},
          {f:[-1,2,4,4,4,-1],fg:[0,1,3,4,4,0],b:null,lbl:'Sin cuerdas agudas',pos:'Traste 2-4',genre:'Bajo sexto -- sonido grueso'}],
   'F':  [{f:[1,3,3,2,1,1],fg:[1,3,4,2,1,1],b:{fret:1,fromStr:0,toStr:5},lbl:'Cejilla 1',pos:'Traste 1-3',genre:'Norteno, Cumbia, Sierreno'},
-         {f:[8,10,10,9,8,8],fg:[1,3,4,2,1,1],b:{fret:8,fromStr:0,toStr:5},lbl:'Cejilla 8',pos:'Traste 8-10',genre:'Posicion alta, licks'},
+         {f:[-1,8,10,10,10,8],fg:[0,1,2,3,4,1],b:{fret:8,fromStr:1,toStr:5},lbl:'Cejilla 8',pos:'Traste 8-10',genre:'Posicion alta, licks'},
          {f:[-1,-1,3,2,1,1],fg:[0,0,3,2,1,1],b:null,lbl:'Sin cuerdas graves',pos:'Traste 1-3',genre:'Norteno -- forma facil de Fa'}],
   // MINOR -- norteno/sierreno menor
   'Am': [{f:[-1,0,2,2,1,0],fg:[0,0,2,3,1,0],b:null,lbl:'Abierta',pos:'Traste 0-2',genre:'Corrido triste, Sierreno oscuro, Bachata'},
          {f:[5,7,7,5,5,5],fg:[1,3,4,1,1,1],b:{fret:5,fromStr:0,toStr:5},lbl:'Cejilla 5',pos:'Traste 5-7',genre:'Sierreno moderno'},
          {f:[-1,0,2,2,1,-1],fg:[0,0,2,3,1,0],b:null,lbl:'Sin 1ra cuerda',pos:'Traste 0-2',genre:'Bajo sexto -- registro mas oscuro'}],
   'Em': [{f:[0,2,2,0,0,0],fg:[0,2,3,0,0,0],b:null,lbl:'Abierta',pos:'Traste 0-2',genre:'Corrido, Sierreno, Norteno menor'},
-         {f:[7,9,9,7,7,7],fg:[1,3,4,1,1,1],b:{fret:7,fromStr:0,toStr:5},lbl:'Cejilla 7',pos:'Traste 7-9',genre:'Sierreno oscuro'}],
+         {f:[-1,7,9,9,8,7],fg:[0,1,2,3,1,1],b:{fret:7,fromStr:1,toStr:5},lbl:'Cejilla 7',pos:'Traste 7-9',genre:'Sierreno oscuro'}],
   'Dm': [{f:[-1,-1,0,2,3,1],fg:[0,0,0,2,3,1],b:null,lbl:'Abierta',pos:'Traste 0-3',genre:'Corrido triste, Norteno menor'},
          {f:[5,5,7,7,6,5],fg:[1,1,3,4,2,1],b:{fret:5,fromStr:0,toStr:5},lbl:'Cejilla 5',pos:'Traste 5-7',genre:'Sierreno moderno'}],
   'Gm': [{f:[3,5,5,3,3,3],fg:[1,3,4,1,1,1],b:{fret:3,fromStr:0,toStr:5},lbl:'Cejilla 3',pos:'Traste 3-5',genre:'Banda, Sierreno'},
@@ -1451,7 +1451,7 @@ var CHORD_SHAPES = {
   'B7': [{f:[-1,2,1,2,0,2],fg:[0,2,1,3,0,4],b:null,lbl:'Abierta',pos:'Traste 0-2',genre:'Norteno -- V7 de Mi, muy caracteristico'},
          {f:[7,9,7,8,7,7],fg:[1,3,1,2,1,1],b:{fret:7,fromStr:0,toStr:5},lbl:'Cejilla 7',pos:'Traste 7-9',genre:'Corrido en tonalidad alta'}],
   'F7': [{f:[1,3,1,2,1,1],fg:[1,3,1,2,1,1],b:{fret:1,fromStr:0,toStr:5},lbl:'Cejilla 1',pos:'Traste 1-3',genre:'Norteno, Cumbia -- V7 de Sib'},
-         {f:[8,10,8,9,8,8],fg:[1,3,1,2,1,1],b:{fret:8,fromStr:0,toStr:5},lbl:'Cejilla 8',pos:'Traste 8-10',genre:'Posicion alta'}],
+         {f:[-1,8,10,8,10,8],fg:[0,1,2,1,3,1],b:{fret:8,fromStr:1,toStr:5},lbl:'Cejilla 8',pos:'Traste 8-10',genre:'Posicion alta'}],
 
   // MORE MAJOR shapes (cejilla pattern for all roots)
   'Bb': [{f:[-1,1,3,3,3,1],fg:[0,1,3,3,3,1],b:{fret:1,fromStr:0,toStr:5},lbl:'Cejilla 1',pos:'Traste 1-3'},
@@ -1463,15 +1463,15 @@ var CHORD_SHAPES = {
 
   // MORE MINOR shapes
   'Fm': [{f:[1,3,3,1,1,1],fg:[1,3,4,1,1,1],b:{fret:1,fromStr:0,toStr:5},lbl:'Cejilla 1',pos:'Traste 1-3'},
-         {f:[8,10,10,8,8,8],fg:[1,3,4,1,1,1],b:{fret:8,fromStr:0,toStr:5},lbl:'Cejilla 8',pos:'Traste 8-10'}],
-  'Cm': [{f:[3,5,5,3,3,3],fg:[1,3,4,1,1,1],b:{fret:3,fromStr:0,toStr:5},lbl:'Cejilla 3',pos:'Traste 3-5'},
+         {f:[-1,8,10,10,9,8],fg:[0,1,2,3,1,1],b:{fret:8,fromStr:1,toStr:5},lbl:'Cejilla 8',pos:'Traste 8-10'}],
+  'Cm': [{f:[-1,3,5,5,4,3],fg:[0,1,2,3,1,1],b:{fret:3,fromStr:1,toStr:5},lbl:'Cejilla 3',pos:'Traste 3-5'},
          {f:[-1,3,5,5,4,3],fg:[0,1,3,4,2,1],b:null,lbl:'Sin cejilla',pos:'Traste 3-5'}],
 
   // MORE DOM7 shapes
   'Bb7':[{f:[-1,1,3,1,3,1],fg:[0,1,3,1,4,1],b:{fret:1,fromStr:0,toStr:5},lbl:'Cejilla 1',pos:'Traste 1-3'},
          {f:[6,8,6,7,6,6],fg:[1,3,1,2,1,1],b:{fret:6,fromStr:0,toStr:5},lbl:'Cejilla 6',pos:'Traste 6-8'}],
   'Eb7':[{f:[-1,-1,1,3,2,3],fg:[0,0,1,3,2,4],b:null,lbl:'Posicion',pos:'Traste 1-3'},
-         {f:[3,5,3,4,3,3],fg:[1,3,1,2,1,1],b:{fret:3,fromStr:0,toStr:5},lbl:'Cejilla 3',pos:'Traste 3-5'}],
+         {f:[-1,6,8,6,8,6],fg:[0,1,2,1,3,1],b:{fret:6,fromStr:1,toStr:5},lbl:'Cejilla 6',pos:'Traste 6-8'}],
   'Ab7':[{f:[4,6,4,5,4,4],fg:[1,3,1,2,1,1],b:{fret:4,fromStr:0,toStr:5},lbl:'Cejilla 4',pos:'Traste 4-6'}],
 
   // MAJ7 shapes
@@ -1507,8 +1507,8 @@ var CHORD_SHAPES = {
   'G9': [{f:[3,2,0,2,0,1],fg:[3,2,0,4,0,1],b:null,lbl:'Abierta',pos:'Traste 0-3'}],
   // 7b9 banda/corrido
   'E7b9':[{f:[0,2,0,1,0,1],fg:[0,3,0,1,0,2],b:null,lbl:'Abierta',pos:'Traste 0-2'}],
-  'A7b9':[{f:[-1,0,2,0,2,1],fg:[0,0,3,0,4,1],b:null,lbl:'Abierta',pos:'Traste 0-2'}],
-  'B7b9':[{f:[-1,2,1,2,0,1],fg:[0,3,1,4,0,2],b:null,lbl:'Abierta',pos:'Traste 0-2'}],
+  'A7b9':[{f:[-1,0,2,0,2,0],fg:[0,0,3,0,4,0],b:null,lbl:'Abierta',pos:'Traste 0-2'}],
+  'B7b9':[{f:[-1,2,1,2,0,2],fg:[0,3,1,4,0,2],b:null,lbl:'Abierta',pos:'Traste 0-2'}],
 };
 
 // =====================================================
@@ -3389,7 +3389,7 @@ window.addEventListener('DOMContentLoaded', function(){
 window.addEventListener('DOMContentLoaded', function(){
   var ver = document.getElementById('set-version');
   if(ver){
-    ver.innerHTML = 'CHORD LAB v2.8 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;font-size:9px;" target="_blank">Privacidad</a>';
+    ver.innerHTML = 'CHORD LAB v2.9 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;font-size:9px;" target="_blank">Privacidad</a>';
   }
 });
 
@@ -3618,7 +3618,7 @@ window.addEventListener('DOMContentLoaded', function(){
       <button onclick="clearAllData()" style="width:100%;background:var(--s2);border:1px solid var(--rose);color:var(--rose);font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:10px;cursor:pointer;">Borrar todos mis datos</button>
     </div>
 
-    <div class="set-version" id="set-version">CHORD LAB v2.8 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;" target="_blank">Privacidad</a></div>
+    <div class="set-version" id="set-version">CHORD LAB v2.9 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;" target="_blank">Privacidad</a></div>
 
   </div>
 </div>
