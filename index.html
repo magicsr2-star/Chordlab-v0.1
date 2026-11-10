@@ -994,7 +994,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoritos', noFavs:'Aun no tienes favoritos',
       saveFav:'Toca [+] en cualquier progresion para guardarla',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.4 Tonal . Para musicos'
+      version:'CHORD LAB v2.6 Tonal . Para musicos'
     }
   },
   'en': {
@@ -1015,7 +1015,7 @@ var LANGS = {
       savedfavs:'[FAV] Favorites', noFavs:'No favorites yet',
       saveFav:'Tap [+] on any progression to save it',
       metronome:'Metronome', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.4 Tonal . For musicians'
+      version:'CHORD LAB v2.6 Tonal . For musicians'
     }
   },
   'pt': {
@@ -1036,7 +1036,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoritos', noFavs:'Sem favoritos ainda',
       saveFav:'Toque [+] em qualquer progressao para salvar',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.4 Tonal . Para musicos'
+      version:'CHORD LAB v2.6 Tonal . Para musicos'
     }
   },
   'fr': {
@@ -1057,7 +1057,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoris', noFavs:'Aucun favori',
       saveFav:'Appuyez sur [+] pour sauvegarder',
       metronome:'Metronome', bpm:'BPM', play:'> JOUER', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.4 Tonal . Pour musiciens'
+      version:'CHORD LAB v2.6 Tonal . Pour musiciens'
     }
   },
   'de': {
@@ -1078,7 +1078,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoriten', noFavs:'Keine Favoriten',
       saveFav:'Tippe [+] auf eine Progression',
       metronome:'Metronom', bpm:'BPM', play:'> ABSPIELEN', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.4 Tonal . Fur Musiker'
+      version:'CHORD LAB v2.6 Tonal . Fur Musiker'
     }
   },
   'it': {
@@ -1099,7 +1099,7 @@ var LANGS = {
       savedfavs:'[FAV] Preferiti', noFavs:'Nessun preferito',
       saveFav:'Tocca [+] su qualsiasi progressione',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.4 Tonal . Per musicisti'
+      version:'CHORD LAB v2.6 Tonal . Per musicisti'
     }
   },
 };
@@ -1437,6 +1437,7 @@ var CHORD_SHAPES = {
          {f:[5,7,5,6,5,5],fg:[1,3,1,2,1,1],b:{fret:5,fromStr:0,toStr:5},lbl:'Cejilla 5',pos:'Traste 5-7',genre:'Sierreno, Corrido moderno'},
          {f:[-1,0,2,0,2,-1],fg:[0,0,2,0,3,0],b:null,lbl:'Compacta',pos:'Traste 0-2',genre:'Bajo sexto -- A7 sin dobles'}],
   'E7': [{f:[0,2,0,1,0,0],fg:[0,2,0,1,0,0],b:null,lbl:'Abierta',pos:'Traste 0-2',genre:'Norteno -- V7 de La, base del corrido'},
+         {f:[0,2,2,2,0,0],fg:[0,2,3,4,0,0],b:null,lbl:'Mi7 sierreño',pos:'Traste 0-2',genre:'Sierreno -- dominante con color sus4'},
          {f:[7,7,9,7,9,7],fg:[1,1,3,1,4,1],b:{fret:7,fromStr:0,toStr:5},lbl:'Cejilla 7',pos:'Traste 7-9',genre:'Corrido en region alta'},
          {f:[0,2,0,1,3,0],fg:[0,2,0,1,3,0],b:null,lbl:'Con 9na',pos:'Traste 0-3',genre:'Norteno moderno -- E9 sabor'}],
   'D7': [{f:[-1,-1,0,2,1,2],fg:[0,0,0,3,1,2],b:null,lbl:'Abierta',pos:'Traste 0-2',genre:'Norteno, Corrido -- V7 de Sol'},
@@ -1660,7 +1661,7 @@ function gBuildTypeList(){
   });
 }
 
-// ---- Motor de acordes con Tonal v2.4 ----
+// ---- Motor de acordes con Tonal v2.6 ----
 // Tonal (@tonaljs/tonal 4.10.0) va empaquetado dentro del archivo: sigue 100% offline.
 // Solo parsea y transpone; las 87 posturas curadas y los diagramas no se tocan.
 // Tonal escribe "madd9"; la app escribe "m(add9)" (alias solo para la consulta).
@@ -1959,11 +1960,28 @@ function getVoicings(root,ct){
     var bfA=(root-9+12)%12; if(bfA===0) bfA=12;
     var bfC=(root+12)%12; if(bfC===0) bfC=12;
     var dp=DO_PATTERNS[ct.sym];
+    // Posicion sierreña de Fa (mayor): solo 2a, 3a y 4a cuerda, sin cejilla.
+    // La misma posicion sube cada dos trastes (Fa 1, Sol 3, La 5...). v2.6.
+    if(ct.sym===''){
+      var bfF=(root-2+12)%12; if(bfF===0) bfF=12;
+      if(bfF>=2 && bfF<=12){
+        voicings.push({label:'Sierreño (Fa)',frets:[-1,-1,bfF,bfF-1,bfF-2,-1],fingers:[0,0,3,2,1,0],barre:null,position:'Traste '+(bfF-2)+'-'+bfF});
+      }
+    }
     if(dp && bfC>=1 && bfC<=12){
       var doFrets=dp.f.map(function(r){return r===0?bfC:(r===-1?-1:bfC+r);});
       var doBarre=null;
       if(dp.barre) doBarre={fret:bfC+(dp.barre.rel||0),fromStr:dp.barre.fromStr,toStr:dp.barre.toStr};
       voicings.push({label:(ct.sym===''?'Cejilla '+bfC+' (forma Do)':'Forma Do '+bfC),frets:doFrets,fingers:dp.fg,barre:doBarre,position:'Traste '+bfC+'-'+(bfC+3)});
+    }
+    // Posicion sierreña de Do (7ma): 2a, 4a y 5a cuerda + meñique en 3a,
+    // en el mismo traste que la 5a. El meñique sube y baja: con meñique es
+    // 7ma, sin meñique es mayor. Misma posicion cada dos trastes. v2.6.
+    if(ct.sym==='7'){
+      var bfD=(root-9+12)%12; if(bfD===0) bfD=12;
+      if(bfD>=2 && bfD<=12){
+        voicings.push({label:'Sierreño (Do)',frets:[-1,bfD,bfD-1,bfD,bfD-2,-1],fingers:[0,3,2,4,1,0],barre:null,position:'Traste '+(bfD-2)+'-'+bfD});
+      }
     }
     if(bfE>=1 && bfE<=12){
       voicings.push({label:'Cejilla '+bfE+' (forma E)',frets:bp.E.f.map(function(r){return r===0?bfE:(r===-1?-1:bfE+r);}),fingers:bp.E.fg,barre:{fret:bfE,fromStr:0,toStr:5},position:'Traste '+bfE+'-'+(bfE+2)});
@@ -1992,7 +2010,7 @@ function getVoicings(root,ct){
     }
     voicings.push({label:'Voicing',frets:fb,fingers:autoFingers(fb,null),barre:null,position:'Variable'});
   }
-  return voicings.slice(0,3);
+  return voicings.slice(0, (ct.sym==='' || ct.sym==='7') ? 4 : 3);
 }
 function autoFingers(frets,barre){
   var used=frets.filter(function(f){return f>0;});
@@ -3230,7 +3248,7 @@ window.addEventListener('DOMContentLoaded', function(){
 window.addEventListener('DOMContentLoaded', function(){
   var ver = document.getElementById('set-version');
   if(ver){
-    ver.innerHTML = 'CHORD LAB v2.4 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;font-size:9px;" target="_blank">Privacidad</a>';
+    ver.innerHTML = 'CHORD LAB v2.6 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;font-size:9px;" target="_blank">Privacidad</a>';
   }
 });
 
@@ -3459,7 +3477,7 @@ window.addEventListener('DOMContentLoaded', function(){
       <button onclick="clearAllData()" style="width:100%;background:var(--s2);border:1px solid var(--rose);color:var(--rose);font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:10px;cursor:pointer;">Borrar todos mis datos</button>
     </div>
 
-    <div class="set-version" id="set-version">CHORD LAB v2.4 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;" target="_blank">Privacidad</a></div>
+    <div class="set-version" id="set-version">CHORD LAB v2.6 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;" target="_blank">Privacidad</a></div>
 
   </div>
 </div>
