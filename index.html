@@ -994,7 +994,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoritos', noFavs:'Aun no tienes favoritos',
       saveFav:'Toca [+] en cualquier progresion para guardarla',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.3 Tonal . Para musicos'
+      version:'CHORD LAB v2.4 Tonal . Para musicos'
     }
   },
   'en': {
@@ -1015,7 +1015,7 @@ var LANGS = {
       savedfavs:'[FAV] Favorites', noFavs:'No favorites yet',
       saveFav:'Tap [+] on any progression to save it',
       metronome:'Metronome', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.3 Tonal . For musicians'
+      version:'CHORD LAB v2.4 Tonal . For musicians'
     }
   },
   'pt': {
@@ -1036,7 +1036,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoritos', noFavs:'Sem favoritos ainda',
       saveFav:'Toque [+] em qualquer progressao para salvar',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.3 Tonal . Para musicos'
+      version:'CHORD LAB v2.4 Tonal . Para musicos'
     }
   },
   'fr': {
@@ -1057,7 +1057,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoris', noFavs:'Aucun favori',
       saveFav:'Appuyez sur [+] pour sauvegarder',
       metronome:'Metronome', bpm:'BPM', play:'> JOUER', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.3 Tonal . Pour musiciens'
+      version:'CHORD LAB v2.4 Tonal . Pour musiciens'
     }
   },
   'de': {
@@ -1078,7 +1078,7 @@ var LANGS = {
       savedfavs:'[FAV] Favoriten', noFavs:'Keine Favoriten',
       saveFav:'Tippe [+] auf eine Progression',
       metronome:'Metronom', bpm:'BPM', play:'> ABSPIELEN', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.3 Tonal . Fur Musiker'
+      version:'CHORD LAB v2.4 Tonal . Fur Musiker'
     }
   },
   'it': {
@@ -1099,7 +1099,7 @@ var LANGS = {
       savedfavs:'[FAV] Preferiti', noFavs:'Nessun preferito',
       saveFav:'Tocca [+] su qualsiasi progressione',
       metronome:'Metronomo', bpm:'BPM', play:'> PLAY', stop:'[STOP] STOP', tap:'TAP',
-      version:'CHORD LAB v2.3 Tonal . Per musicisti'
+      version:'CHORD LAB v2.4 Tonal . Per musicisti'
     }
   },
 };
@@ -1572,6 +1572,60 @@ var CHORD_TYPES = [
   {name:'Menor 6',   sym:'m6',    cat:'Add',       iv:[0,3,7,9],    desc:'Agridulce. Bossa nova, bolero.'},
   {name:'6/9',       sym:'6/9',   cat:'Add',       iv:[0,4,7,9,14], desc:'Fresco y redondo. Cumbia moderna.'},
 ];
+// ---- Por que suena asi (v2.4) ----
+// Una linea por tipo de acorde: la idea, no la definicion de diccionario.
+var CHORD_WHY = {
+  '':'La base de todo: tonica estable. De aqui sale la primera del sierreno.',
+  'm':'Menor: la tercera baja medio tono y el acorde se vuelve triste. El sierreno lleva dos o tres menores.',
+  'sus2':'Suspendida: la segunda sustituye a la tercera. Suena abierta, pide seguir.',
+  'sus4':'Suspendida: la cuarta sustituye a la tercera. Tension que pide resolver al mayor.',
+  'aug':'Aumentada: la quinta sube medio tono. Tensa, casi siempre de paso.',
+  'dim':'Disminuida: tercera menor y quinta disminuida. Maxima tension, de paso.',
+  '7':'El septimo dominante: prepara el regreso a la tonica. Suena a mayor pero su trabajo es anunciar la resolucion.',
+  'maj7':'Mayor con septima mayor: la septima no baja, queda dulce y sofisticada.',
+  'm7':'Menor con septima menor: oscura y fluida, la mas usada para acompanar en menor.',
+  'mM7':'Menor con septima mayor: choque entre menor y mayor. Dramatica.',
+  'm7b5':'Semidisminuido: el ii de menor. Corridos tristes y giros a menor.',
+  'dim7':'Disminuido con septima: notas a distancia igual. Tension total, de puente.',
+  '7sus4':'Dominante suspendido: la cuarta retrasa la tercera. Tension que se resuelve al 7.',
+  '9':'Dominante con novena: el 7 con un color mas. Sierreno moderno.',
+  'maj9':'Mayor con novena: lujosa, con septima mayor y novena.',
+  'm9':'Menor con novena: oscura y rica, con septima menor.',
+  '7b9':'Dominante con novena bemol: tension flamenca y de mariachi.',
+  '7#9':'Dominante con novena sostenida: el acorde Hendrix, tercera mayor y #9 juntas.',
+  'add9':'Mayor con novena anadida, sin septima: fresco y abierto.',
+  'm(add9)':'Menor con novena anadida: romantico, muy de sierreno.',
+  '6':'Mayor con sexta: brillante y redondo. Cumbia y norteno.',
+  'm6':'Menor con sexta: agridulce, de bolero y bossa.',
+  '6/9':'Mayor con sexta y novena: fresco, sin tension. Cumbia moderna.'
+};
+function chordWhyHTML(ct){
+  var txt = CHORD_WHY[ct.sym] || ct.desc || '';
+  if(!txt) return '';
+  return '<div style="margin:10px 0 0;padding:10px 14px;background:#0d0e18;border:1px solid #1e2035;border-left:3px solid #2dd4bf;">'
+    +'<div style="font-family:JetBrains Mono,monospace;font-size:8px;letter-spacing:2px;color:#2dd4bf;text-transform:uppercase;margin-bottom:6px;">Por que suena asi</div>'
+    +'<div style="font-family:Outfit,sans-serif;font-size:12px;color:#8888aa;line-height:1.5;">'+txt+'</div></div>';
+}
+// Receta sierrena en un tono: primera, segunda, tercera, septimo y menores.
+// Se calcula con el tono actual, no se escribe a mano. v2.4.
+function sierrenoRecipeHTML(root){
+  function nm(semi,suf){ return noteName((root+semi)%12)+(suf||''); }
+  var items=[
+    ['Primera', nm(0)],
+    ['Segunda', nm(5)],
+    ['Tercera', nm(7)],
+    ['Septimo', nm(7,'7')],
+    ['Menores', nm(9,'m')+' - '+nm(2,'m')+' - '+nm(4,'m')]
+  ];
+  var pills=items.map(function(it){
+    return '<span style="display:inline-block;padding:4px 10px;margin:2px;border:1px solid #1e2035;background:#0d0e18;font-family:JetBrains Mono,monospace;font-size:10px;color:#e2e4f0;">'
+      +'<span style="color:#888;">'+it[0]+': </span>'+it[1]+'</span>';
+  }).join('');
+  return '<div style="margin:10px 0 0;padding:10px 14px;background:#0d0e18;border:1px solid #1e2035;border-left:3px solid #f97316;">'
+    +'<div style="font-family:JetBrains Mono,monospace;font-size:8px;letter-spacing:2px;color:#f97316;text-transform:uppercase;margin-bottom:6px;">Receta sierrena en '+noteName(root)+'</div>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:4px;">'+pills+'</div>'
+    +'<div style="font-family:Outfit,sans-serif;font-size:12px;color:#8888aa;line-height:1.5;margin-top:8px;">Primera, segunda y tercera, el septimo como preparacion y dos o tres menores. La misma forma en cuerdas 1-2-3 suena menor: entre Sol y Si hay una tercera, no una cuarta.</div></div>';
+}
 var INAMES={0:'R',1:'b2',2:'2',3:'b3',4:'3',5:'4',6:'b5',7:'5',8:'#5',9:'6',10:'b7',11:'7',13:'b9',14:'9',15:'#9',17:'11',21:'13'};
 var gRoot=0, gType=0;
 
@@ -1606,7 +1660,7 @@ function gBuildTypeList(){
   });
 }
 
-// ---- Motor de acordes con Tonal v2.3 ----
+// ---- Motor de acordes con Tonal v2.4 ----
 // Tonal (@tonaljs/tonal 4.10.0) va empaquetado dentro del archivo: sigue 100% offline.
 // Solo parsea y transpone; las 87 posturas curadas y los diagramas no se tocan.
 // Tonal escribe "madd9"; la app escribe "m(add9)" (alias solo para la consulta).
@@ -1722,6 +1776,8 @@ function gRenderDiagram(){
   });
   c1.appendChild(ntable);
 
+  var whyDiv=document.createElement('div');whyDiv.innerHTML=chordWhyHTML(ct);c1.appendChild(whyDiv);
+
   // neck diagrams
   var nkLbl=document.createElement('div');nkLbl.className='plabel';nkLbl.style.marginTop='14px';nkLbl.textContent='// Diagramas en guitarra';c1.appendChild(nkLbl);
   var lgDiv=document.createElement('div');lgDiv.innerHTML=fingerLegendHTML();c1.appendChild(lgDiv);
@@ -1776,6 +1832,12 @@ function gRenderDiagram(){
   })();
   c3.appendChild(fbWrap);area.appendChild(c3);
 
+  // Card 4: receta sierrena (v2.4)
+  var c4=document.createElement('div');c4.className='pcard';
+  var c4Lbl=document.createElement('div');c4Lbl.className='plabel';c4Lbl.textContent='// Para entenderlo';c4.appendChild(c4Lbl);
+  var rDiv=document.createElement('div');rDiv.innerHTML=sierrenoRecipeHTML(gRoot);c4.appendChild(rDiv);
+  area.appendChild(c4);
+
   // Progresiones de generos disponibles en la pestana Generos
 }
 
@@ -1801,6 +1863,11 @@ function gBuildNeckDiagrams(wrap, root, ct){
     lb.style.cssText='font-family:JetBrains Mono,monospace;font-size:8px;color:var(--muted);text-align:right;';
     lb.textContent=v.label;
     hdr.appendChild(nm);hdr.appendChild(lb);
+    var spk=document.createElement('button');
+    spk.style.cssText='background:none;border:1px solid #1e2035;border-radius:4px;color:#f5c842;font-size:12px;cursor:pointer;padding:2px 6px;line-height:1;';
+    spk.textContent='🔊';spk.title='Escuchar acorde';
+    spk.addEventListener('click',function(ev){ev.stopPropagation();playChord(v.frets);});
+    hdr.appendChild(spk);
     card.appendChild(hdr);
 
     // Diagram
@@ -1854,8 +1921,9 @@ function getVoicings(root,ct){
     });
   }
 
-  // Fallback practico: solo posturas reales tocables.
-  // (a) posicion abierta 0-4, (b) cejillas forma E y forma A para
+  // Fallback practico: solo posturas reales tocables (al menos 3 notas
+  // distintas del acorde: una voicing con solo tonica+quinta no es el acorde).
+  // (a) posicion abierta 0-4, (b) cejillas forma E, forma A y forma Do para
   // Mayor/Menor/7/maj7/m7. Otros tipos: calculo filtrado por extension.
   var ci=new Set(ct.iv.map(function(iv){ return (root+iv)%12; }));
   var op=[4,9,2,7,11,4];
@@ -1864,10 +1932,12 @@ function getVoicings(root,ct){
   function spanOK(fr){ var p=fr.filter(function(f){return f>0;}); if(p.length===0) return true; return (Math.max.apply(null,p)-Math.min.apply(null,p))<=4; }
   function sounding(fr){ return fr.filter(function(f){return f>=0;}).length; }
   function hasRoot(fr){ for(var i=0;i<6;i++){ if(fr[i]>=0 && (op[i]+fr[i])%12===root%12) return true; } return false; }
+  function distinctCount(fr){ var s=new Set(); fr.forEach(function(f,i){ if(f>=0) s.add((op[i]+f)%12); }); return s.size; }
   var of=op.map(function(sp){ return bestFret(sp,0,4); });
-  if(sounding(of)>=3 && spanOK(of) && hasRoot(of))
+  if(sounding(of)>=3 && spanOK(of) && hasRoot(of) && distinctCount(of)>=3)
     voicings.push({label:'Posicion abierta',frets:of,fingers:autoFingers(of,null),barre:null,position:'Trastes 0-4'});
-  // Cejillas forma E (tonica en 6a) y forma A (tonica en 5a)
+  // Cejillas forma E (tonica en 6a), forma A (tonica en 5a) y forma Do
+  // (tonica en 5a, +3 trastes: la del sierreno). v2.4.
   var BARRE_PATTERNS={
     '':   {E:{f:[0,2,2,1,0,0],fg:[1,3,4,2,1,1]}, A:{f:[-1,0,2,2,2,0],fg:[0,1,2,3,4,1]}},
     'm':  {E:{f:[0,2,2,0,0,0],fg:[1,3,4,1,1,1]}, A:{f:[-1,0,2,2,1,0],fg:[0,1,2,3,1,1]}},
@@ -1875,10 +1945,26 @@ function getVoicings(root,ct){
     'maj7':{E:{f:[0,2,1,1,0,0],fg:[1,4,2,3,1,1]}, A:{f:[-1,0,2,1,2,0],fg:[0,1,2,1,3,1]}},
     'm7': {E:{f:[0,2,0,0,0,0],fg:[1,3,1,1,1,1]}, A:{f:[-1,0,2,0,1,0],fg:[0,1,2,1,1,1]}}
   };
+  // Forma Do: la forma abierta de Do movible (el indice es la cejilla).
+  // f relativos a bfC (tonica en 5a = bfC+3). Mayor: minicejilla en 3a y 1a;
+  // menor: minicejilla del indice en 4a y 2a (rel:1); 7: dedos sueltos.
+  var DO_PATTERNS={
+    '':  {f:[-1,3,2,0,1,0],fg:[0,3,2,1,4,1],barre:{fromStr:3,toStr:5}},
+    'm': {f:[-1,3,1,0,1,-1],fg:[0,3,1,2,1,0],barre:{fromStr:2,toStr:4,rel:1}},
+    '7': {f:[-1,3,2,3,1,0],fg:[0,3,2,4,1,1],barre:null}
+  };
   var bp=BARRE_PATTERNS[ct.sym];
   if(bp){
     var bfE=(root-4+12)%12; if(bfE===0) bfE=12;
     var bfA=(root-9+12)%12; if(bfA===0) bfA=12;
+    var bfC=(root+12)%12; if(bfC===0) bfC=12;
+    var dp=DO_PATTERNS[ct.sym];
+    if(dp && bfC>=1 && bfC<=12){
+      var doFrets=dp.f.map(function(r){return r===0?bfC:(r===-1?-1:bfC+r);});
+      var doBarre=null;
+      if(dp.barre) doBarre={fret:bfC+(dp.barre.rel||0),fromStr:dp.barre.fromStr,toStr:dp.barre.toStr};
+      voicings.push({label:(ct.sym===''?'Cejilla '+bfC+' (forma Do)':'Forma Do '+bfC),frets:doFrets,fingers:dp.fg,barre:doBarre,position:'Traste '+bfC+'-'+(bfC+3)});
+    }
     if(bfE>=1 && bfE<=12){
       voicings.push({label:'Cejilla '+bfE+' (forma E)',frets:bp.E.f.map(function(r){return r===0?bfE:(r===-1?-1:bfE+r);}),fingers:bp.E.fg,barre:{fret:bfE,fromStr:0,toStr:5},position:'Traste '+bfE+'-'+(bfE+2)});
     }
@@ -1888,15 +1974,25 @@ function getVoicings(root,ct){
   } else {
     [2,5,7,9].forEach(function(bf){
       var ff=op.map(function(sp){ return bestFret(sp,bf,bf+4); });
-      if(sounding(ff)>=3 && spanOK(ff) && hasRoot(ff))
+      if(sounding(ff)>=3 && spanOK(ff) && hasRoot(ff) && distinctCount(ff)>=3)
         voicings.push({label:'Cejilla '+bf,frets:ff,fingers:autoFingers(ff,bf),barre:{fret:bf},position:'Traste '+bf+'-'+(bf+4)});
     });
   }
   if(voicings.length===0){
     var fb=op.map(function(sp){ return bestFret(sp,0,12); });
+    // El ultimo recurso tambien debe tener la tonica: si falta, se pone
+    // en la cuerda mas grave donde quepa sin romper la extension.
+    if(!hasRoot(fb)){
+      for(var ri=0;ri<6;ri++){
+        var rf=(root-op[ri]%12+12)%12;
+        var trial=fb.slice(); trial[ri]=rf;
+        if(spanOK(trial)){ fb=trial; break; }
+      }
+      if(!hasRoot(fb)){ fb[0]=(root-op[0]%12+12)%12; }
+    }
     voicings.push({label:'Voicing',frets:fb,fingers:autoFingers(fb,null),barre:null,position:'Variable'});
   }
-  return voicings.slice(0,2);
+  return voicings.slice(0,3);
 }
 function autoFingers(frets,barre){
   var used=frets.filter(function(f){return f>0;});
@@ -2085,7 +2181,9 @@ function drawDiagram(frets, fingers, root, chordNotes, explicitBarre, W, H, pL, 
       svg += '<text x="'+bx+'" y="'+(((by1+by2)/2)+Math.round(dotR*0.4))+'"'
         + ' font-family="JetBrains Mono,monospace" font-size="'+Math.round(dotR*0.8)+'"'
         + ' font-weight="bold" fill="#000" text-anchor="middle">'+barre.fret+'</text>';
-      for(var bi2=barre.fromStr; bi2<=barre.toStr; bi2++) barreStringSet[bi2] = true;
+      // Solo la cuerda que suena en el traste de la cejilla queda tapada:
+      // un dedo por encima de la cejilla si se dibuja (v2.4).
+      for(var bi2=barre.fromStr; bi2<=barre.toStr; bi2++){ if(frets[bi2]===barre.fret) barreStringSet[bi2] = true; }
     }
   }
 
@@ -2522,6 +2620,30 @@ function metroClick(isAccent){
   }catch(e){}
 }
 
+// Escuchar un acorde: rasgueo por cuerdas con WebAudio (offline, sin archivos).
+// frets: [E A D G B e], -1=muda, 0=al aire. Reusa el contexto del metronomo. v2.4.
+function playChord(frets){
+  try{
+    var ctx=getAudioCtx();
+    if(ctx.state==='suspended') ctx.resume();
+    var OPEN_MIDI=[40,45,50,55,59,64]; // E2 A2 D3 G3 B3 E4
+    var t0=ctx.currentTime+0.02, step=0.035, n=0;
+    [0,1,2,3,4,5].forEach(function(si){
+      var f=frets[si];
+      if(f<0) return;
+      var freq=440*Math.pow(2,(OPEN_MIDI[si]+f-69)/12);
+      var t=t0+n*step; n++;
+      var osc=ctx.createOscillator(),gain=ctx.createGain();
+      osc.type='triangle'; osc.frequency.value=freq;
+      osc.connect(gain); gain.connect(ctx.destination);
+      gain.gain.setValueAtTime(0.0001,t);
+      gain.gain.exponentialRampToValueAtTime(0.22,t+0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001,t+1.4);
+      osc.start(t); osc.stop(t+1.5);
+    });
+  }catch(e){}
+}
+
 function metroTick(){
   document.querySelectorAll('.metro-beat').forEach(function(b){b.classList.remove('active');});
   var beatEl=document.getElementById('mbeat-'+metroBeat);
@@ -2694,6 +2816,13 @@ function openChordModal(root,ct,voicingIdx){
 
   var v=voicings[vi];
   var chordNotes=new Set(ct.iv.map(function(iv){return (root+iv)%12;}));
+  if(tabsEl){
+    var spk=document.createElement('button');
+    spk.style.cssText='font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border:1px solid #f5c842;background:#f5c842;color:#000;cursor:pointer;margin-right:4px;margin-bottom:4px;';
+    spk.textContent='🔊 Escuchar';
+    spk.onclick=function(){ playChord(v.frets); };
+    tabsEl.appendChild(spk);
+  }
   var diagWrap=document.getElementById('modalDiagramWrap');
   if(diagWrap){
     var html = drawNeckLarge(v.frets,v.fingers,v.barre,root,chordNotes,v.label,v.position);
@@ -2725,6 +2854,8 @@ function openChordModal(root,ct,voicingIdx){
         +'color:'+(isR?'#000':'#34d399')+';font-weight:'+(isR?'bold':'normal')+';">'+noteName(pitch)+'</span>';
     });
     html += '</div>';
+
+    html += chordWhyHTML(ct);
 
     diagWrap.innerHTML = html;
   }
@@ -3099,7 +3230,7 @@ window.addEventListener('DOMContentLoaded', function(){
 window.addEventListener('DOMContentLoaded', function(){
   var ver = document.getElementById('set-version');
   if(ver){
-    ver.innerHTML = 'CHORD LAB v2.3 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;font-size:9px;" target="_blank">Privacidad</a>';
+    ver.innerHTML = 'CHORD LAB v2.4 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;font-size:9px;" target="_blank">Privacidad</a>';
   }
 });
 
@@ -3328,7 +3459,7 @@ window.addEventListener('DOMContentLoaded', function(){
       <button onclick="clearAllData()" style="width:100%;background:var(--s2);border:1px solid var(--rose);color:var(--rose);font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:10px;cursor:pointer;">Borrar todos mis datos</button>
     </div>
 
-    <div class="set-version" id="set-version">CHORD LAB v2.3 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;" target="_blank">Privacidad</a></div>
+    <div class="set-version" id="set-version">CHORD LAB v2.4 Tonal &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--teal);text-decoration:none;" target="_blank">Privacidad</a></div>
 
   </div>
 </div>
